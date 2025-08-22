@@ -48,8 +48,8 @@ const router = createRouter({
     component: OuvidoriaView,
     },
     {
-      path: '/Ocorrencia',
-      name: 'Ocorrencia',
+      path: '/Ocorrencias',
+      name: 'Ocorrencias',
       component: OcorrenciaView,
     },
     {
