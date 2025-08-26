@@ -6,8 +6,11 @@ import BotaoCadastroComponent from './BotaoCadastroComponent.vue';
 </script>
 
 <template>
-    <div>
-        <h1> logo </h1>
+    <header>
+
+        <div class="bg-red-500 text-white p-4">oi</div>
+        <div>
+        <img src="/Logo.png" alt="logo">
     </div>
     <div>
         <nav>
@@ -44,5 +47,6 @@ import BotaoCadastroComponent from './BotaoCadastroComponent.vue';
             </RouterLink>
         </ul>
     </div>
+    </header>
 </template>
 
