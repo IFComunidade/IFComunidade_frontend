@@ -6,46 +6,46 @@ import BotaoCadastroComponent from './BotaoCadastroComponent.vue';
 </script>
 
 <template>
-    <header>
-
-        <div class="bg-red-500 text-white p-4">oi</div>
-        <div>
+    <header class="mt-5" >
+        <div class="flex items-center justify-between">
+        <div class="pl-18">
         <img src="/Logo.png" alt="logo">
     </div>
-    <div>
+    <div class="flex" >
         <nav>
-            <ul>
-                <li>
+            <ul class="flex gap-10 justify-center text-center">
+                <li class="">
                     <RouterLink to= "/">
-                        Início
+                       <p class="">Início</p> 
                      </RouterLink>
                 </li>
                  <li>
                     <RouterLink to= "/MURALinterliga">
-                        MURALinterliga
+                       <p>MURALinterliga</p> 
                      </RouterLink>
                 </li>
                 <li>
                     <RouterLink to= "/Ocorrencias">
-                        Ocorrências
+                        <p>Ocorrências</p>
                      </RouterLink>
                 </li>
             </ul>
         </nav>
     </div>
     <div>
-        <ul>
-            <RouterLink to= "/Cadastro">
-                <li>
+        <ul class="flex gap-10 pr-35">
+                <li class="">
+                <RouterLink to= "/Cadastro">
                     <BotaoCadastroComponent />
+                </RouterLink>
                 </li>
-            </RouterLink>
-            <RouterLink to= "/Login">
-                <li>
+                <li class="mx-10">
+                <RouterLink to= "/Login">
                     <LoginComponent />
+                </RouterLink>
                 </li>
-            </RouterLink>
         </ul>
+    </div>
     </div>
     </header>
 </template>
