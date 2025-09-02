@@ -14,7 +14,7 @@ const activeColor = (path) =>
 <template>
     <header class="mt-5" >
         <div class="flex items-center justify-between">
-        <div class="pl-18">
+        <div class="">
         <img src="/Logo.png" alt="logo">
     </div>
     <div class="flex" >
@@ -42,13 +42,13 @@ const activeColor = (path) =>
         </nav>
     </div>
     <div>
-        <ul class="flex gap-10 pr-35">
+        <ul class="flex gap-5">
                 <li class="">
                 <RouterLink to= "/Cadastro">
                     <BotaoCadastroComponent />
                 </RouterLink>
                 </li>
-                <li class="mx-10">
+                <li class="">
                 <RouterLink to= "/Login">
                     <LoginComponent />
                 </RouterLink>
