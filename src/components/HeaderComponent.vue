@@ -1,7 +1,13 @@
 <script setup>
 
+import { useRoute } from 'vue-router'
 import LoginComponent from './LoginComponent.vue';
 import BotaoCadastroComponent from './BotaoCadastroComponent.vue';
+
+const route = useRoute();
+
+const activeColor = (path) =>
+  route.path === path ? 'color: #141414' : 'color: #A7A7A7';
 
 </script>
 
@@ -15,18 +21,21 @@ import BotaoCadastroComponent from './BotaoCadastroComponent.vue';
         <nav>
             <ul class="flex gap-10 justify-center text-center">
                 <li class="">
-                    <RouterLink to= "/">
-                       <p class="">Início</p> 
+                    <RouterLink to= "/" :style="activeColor('/')"
+                    class="inline-block transition-transform duration-200 hover:scale-105">
+                        Início
                      </RouterLink>
                 </li>
                  <li>
-                    <RouterLink to= "/MURALinterliga">
-                       <p>MURALinterliga</p> 
+                    <RouterLink to= "/MURALinterliga" :style="activeColor('/MURALinterliga')"
+                    class="inline-block transition-transform duration-200 hover:scale-105">
+                       MURALinterliga
                      </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to= "/Ocorrencias">
-                        <p>Ocorrências</p>
+                    <RouterLink to= "/Ocorrencias" :style="activeColor('/Ocorrencias')"
+                    class="inline-block transition-transform duration-200 hover:scale-105">
+                        Ocorrências
                      </RouterLink>
                 </li>
             </ul>
