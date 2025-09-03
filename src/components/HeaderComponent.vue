@@ -12,10 +12,10 @@ const activeColor = (path) =>
 </script>
 
 <template>
-    <header class="mt-5" >
+    <header class="mt-5 px-22" >
         <div class="flex items-center justify-between">
         <div class="">
-        <img src="/Logo.png" alt="logo">
+        <img src="/LogoIFC.png" alt="logo" class="w-[260px] h-[100px]">
     </div>
     <div class="flex" >
         <nav>
