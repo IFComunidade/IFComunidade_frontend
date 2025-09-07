@@ -7,7 +7,7 @@ import OuvidoriaAdministrativaView from '@/views/OuvidoriaAdministrativaView.vue
 import PerfilView from '@/views/PerfilView.vue'
 import OuvidoriaView from '@/views/OuvidoriaView.vue'
 import OcorrenciaView from '@/views/OcorrenciaView.vue'
-import DadosPessoaisView from '@/views/DadosPessoaisView.vue' 
+import DadosPessoaisView from '@/views/DadosPessoaisView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,7 +56,12 @@ const router = createRouter({
       path: '/DadosPessoais',
       name: 'DadosPessoais',
       component: DadosPessoaisView,
-    }
+    },
+    {
+    path: '/playground',
+    name: 'playground',
+    component: () => import('@/utils/PlayGround.vue'),
+    },
   ],
 })
 
