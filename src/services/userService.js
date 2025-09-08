@@ -4,11 +4,12 @@ class UserService {
 
   async login (email, password) {
     try{
+      console.log('Tentando login com', { email, password})
       const { data } = await api.post('token/', { email, password})
-  
+
       localStorage.setItem('token', data.access);
       localStorage.setItem('refreshToken', data.refresh);
-  
+
       return data;
     } catch (error) {
       console.error('Erro ao fazer login', error);
@@ -27,8 +28,8 @@ class UserService {
   }
 
   async logout () {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     delete api.defaults.headers.common['Authorization'];
   }
 }
