@@ -1,4 +1,4 @@
-import api from '@/axios/api'
+import api from '@/plugins/api'
 
 export default class OcorrenciaService {
   async getAllOcorrencia() {

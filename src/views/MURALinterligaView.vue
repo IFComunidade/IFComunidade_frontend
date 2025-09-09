@@ -1,6 +1,15 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { usePostagemStore } from '@/stores/postagemStore';
+
 const mostrarFiltro = ref(false);
+const postagemStore = usePostagemStore()
+
+onMounted(() => {
+  postagemStore.getPostagens();
+});
+
+
 </script>
 
 <template>
@@ -41,6 +50,24 @@ const mostrarFiltro = ref(false);
         </div>
     </div>
   </div>
+</section>
+
+<section>
+
+  <div v-if="postagemStore.isLoading">
+    <p>Carregando postagens</p>
+  </div>
+
+  <div v-else>
+    <ul >
+      <li v-for="postagem in postagemStore.postagens" :key="postagem.id" class="border-b-2 border-[#386641] p-5 m-5">
+        <h2 class="text-2xl font-bold mb-2">{{ postagem.titulo }}</h2>
+        <p class="mb-4">{{ postagem.descricao }}</p>
+        <p class="text-sm text-gray-600">Publicado em: {{ new Date(postagem.data).toLocaleDateString() }}</p>
+      </li>
+    </ul>
+  </div>
+
 </section>
 
 </template>
