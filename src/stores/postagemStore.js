@@ -1,6 +1,5 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
-import OcorrenciaService from '@/services/postagemService';
 import PostagemService from '@/services/postagemService';
 
 export const postagemService = defineStore('postagem', () => {
