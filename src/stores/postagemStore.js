@@ -2,7 +2,7 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import PostagemService from '@/services/postagemService';
 
-export const postagemService = defineStore('postagem', () => {
+export const usePostagemStore = defineStore('postagem', () => {
 
     const postagens = ref([]);
     const loading = ref(false);
@@ -13,7 +13,8 @@ export const postagemService = defineStore('postagem', () => {
     const getPostagens = async () => {
       loading.value = true;
       try {
-        postagens.value = await PostagemService.getAllPostagens();
+        postagens.value = await PostagemService.getAllPostagem();
+        console.log(postagens.value)
       } catch (error) {
         console.error('Erro ao carregar postagens:', error);
       } finally {
