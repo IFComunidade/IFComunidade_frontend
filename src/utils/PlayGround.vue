@@ -135,7 +135,7 @@ async function login() {
 
   <button @click="userStore.logout()">SAIR</button>
 
-  <div v-if="userStore.isLoggedIn()">
+  <div v-if="userStore.isLoggedIn">
     <p>Logado com: {{ userStore.usuario.nome }}</p>
   </div>
   <div v-else>

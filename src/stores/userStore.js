@@ -1,10 +1,10 @@
-import { reactive } from "vue";
+import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import userService from "@/services/userService";
 
 export const useUserStore = defineStore('usuario', () => {
 
-  const usuario = reactive({
+  const usuario = ref({
     email: '',
     password: '',
     nome: '',
@@ -16,7 +16,7 @@ export const useUserStore = defineStore('usuario', () => {
     foto_attachment_key: null,
   });
 
-  const tokens = reactive({
+  const tokens = ref({
     access: null,
     refresh: null
   })
@@ -27,17 +27,14 @@ export const useUserStore = defineStore('usuario', () => {
     try {
       const data = await userService.login(email, password);
 
-      tokens.access = data.access;
-      tokens.refresh = data.refresh;
+      tokens.value.access = data.access;
+      tokens.value.refresh = data.refresh;
 
       //PREENCHE OS DADOS:
-      usuario.nome = data.usuario.nome;
-      usuario.email = data.usuario.email;
-      usuario.tipo = data.usuario.tipo;
-      usuario.matricula = data.usuario.matricula;
-      usuario.cpf = data.usuario.cpf;
-      usuario.sigla = data.usuario.sigla;
-      usuario.foto_attachment_key = data.usuario.foto_attachment_key;
+      usuario.value = data.user;
+
+      localStorage.setItem('token', data.access);
+      localStorage.setItem('user', JSON.stringify(data.user));
 
       return data
     } catch (error) {
@@ -47,10 +44,7 @@ export const useUserStore = defineStore('usuario', () => {
   };
 
   //VERIFICA SE ESTA LOGADO
-    const isLoggedIn = () => {
-    const token = localStorage.getItem('token');
-    return !!token;
-  }
+   const isLoggedIn = computed(() => !!tokens.value.access);
 
 
   //CADASTRO
@@ -66,16 +60,36 @@ export const useUserStore = defineStore('usuario', () => {
 
   //LOGOUT
   const logout = () => {
-    userService.logout();
-    usuario.email =  '';
-    usuario.nome = '';
-    usuario.cpf = '';
-    usuario.matricula = '';
-    usuario.curso = null;
-    usuario.sigla = '';
-    usuario.tipo = 1;
-    usuario.foto_attachment_key = null;
+    usuario.value = {
+      email: '',
+      password: '',
+      nome: '',
+      cpf: '',
+      matricula: '',
+      curso: null,
+      sigla: '',
+      tipo: 1,
+      foto_attachment_key: null
+    };
+
+    tokens.value = { access: null, refresh: null };
+
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
+
+
+  const initStore = () => {
+  const savedToken = localStorage.getItem('token');
+  const savedUser = localStorage.getItem('user');
+
+  if (savedToken && savedUser) {
+    tokens.value.access = savedToken;
+    usuario.value = JSON.parse(savedUser);
+  }
+};
+
+initStore();
 
   return { usuario, registrarUsuario, login, isLoggedIn, logout };
 

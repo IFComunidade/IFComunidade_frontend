@@ -62,6 +62,11 @@ const router = createRouter({
     name: 'playground',
     component: () => import('@/utils/PlayGround.vue'),
     },
+    {
+      path: '/alunos',
+      name: 'alunos',
+      component: () => import('@/utils/RgAluno.vue'),
+    }
   ],
 })
 

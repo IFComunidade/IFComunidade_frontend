@@ -4,8 +4,7 @@ class UserService {
 
   async login (email, password) {
     try{
-      console.log('Tentando login com', { email, password})
-      const { data } = await api.post('token/', { email, password})
+      const { data } = await api.post('token/', { email, password })
 
       localStorage.setItem('token', data.access);
       localStorage.setItem('refreshToken', data.refresh);
