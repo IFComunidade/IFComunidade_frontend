@@ -26,6 +26,7 @@ const router = createRouter({
     path: '/Cadastro',
     name: 'Cadastro',
     component: CadastroView,
+    meta: { hideLayout: true },
     },
     {
     path: '/Login',
