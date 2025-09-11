@@ -2,6 +2,7 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import CategoriaService from '@/services/categoriaService';
 
+
 export const useCategoriaStore = defineStore('categoria', () => {
 
     const categorias = ref([]);
