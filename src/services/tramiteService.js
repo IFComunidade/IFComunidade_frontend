@@ -1,6 +1,6 @@
 import api from '@/plugins/api'
 
-export default class TramiteService {
+class TramiteService {
   async getAllTramites() {
     try {
       const { data } = await api.get('/tramites');
@@ -61,3 +61,5 @@ export default class TramiteService {
     }
   }
 }
+
+export default new TramiteService();
