@@ -1,13 +1,14 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL: 'https://localhost:8000/api',
+  baseURL: 'http://localhost:8000/api',
 })
 
 axiosInstance.interceptors.request.use(
   function (config) {
     const token = localStorage.getItem('token')
-    if (token) {
+    const isPublicGet = config.method === 'get' && config.url.includes('/postagens')
+    if (token && !isPublicGet) {
       config.headers['Authorization'] = `Bearer ${token}`
     }
     return config
