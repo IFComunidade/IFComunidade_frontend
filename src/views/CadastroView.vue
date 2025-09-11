@@ -106,9 +106,7 @@ function goHome() {
             <h2 class="text-2xl font-bold text-center mb-8"><span class="mdi mdi-lock-check-outline"></span> Insira
                 abaixo:</h2>
             <div class="flex justify-center items-center gap-2 min-h-[90px]">
-                <input v-for="(_, i) in values" :key="i" :id="`otp-${i}`" v-model="values[i]" maxlength="1"
-                    class="w-10 h-10 text-center border-1 border-[#386641] rounded-md focus:outline-none focus:border-green-900"
-                    @input="(e) => handleInput(e, i)" @keydown="(e) => handleBackspace(e, i)" />
+               <input type="text" id="matricula" v-model="matricula" class="w-66 h-12 px-2 border border-[#A7A7A7] rounded text-center focus:outline-none -mt-5 text-left ">
             </div>
             <div class="flex justify-center mt-6">
                 <button @click="nextStep"

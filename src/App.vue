@@ -1,14 +1,15 @@
 <script setup>
-import { RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 
+const route = useRoute();
 </script>
 
 <template>
 
-    <HeaderComponent />
+    <HeaderComponent v-if="!route.meta.hideLayout" />
 
     <main>
 
@@ -16,7 +17,7 @@ import FooterComponent from './components/FooterComponent.vue';
 
     </main>
 
-    <FooterComponent />
+    <FooterComponent v-if="!route.meta.hideLayout" />
 
 </template>
 
