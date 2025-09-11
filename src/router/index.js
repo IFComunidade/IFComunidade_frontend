@@ -3,10 +3,12 @@ import HomeView from '@/views/HomeView.vue'
 import MURALinterligaView from '@/views/MURALinterligaView.vue'
 import CadastroView from '@/views/CadastroView.vue'
 import LoginView from '@/views/LoginView.vue'
-import OuvidoriaAdministrativaView from '@/views/OuvidoriaAdministrativaView.vue'
+import ListagemOcorrenciaSetorView from '@/views/ListagemOcorrenciaSetorView.vue'
 import PerfilView from '@/views/PerfilView.vue'
-import OuvidoriaView from '@/views/OuvidoriaView.vue'
-import OcorrenciaView from '@/views/OcorrenciaView.vue'
+// import OuvidoriaView from '@/views/OuvidoriaView.vue'
+// import OcorrenciaView from '@/views/OcorrenciaView.vue'
+import ListagemOcorrenciaAlunoView from '@/views/ListagemOcorrenciaAlunoView.vue'
+import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import DadosPessoaisView from '@/views/DadosPessoaisView.vue'
 
 const router = createRouter({
@@ -26,6 +28,7 @@ const router = createRouter({
     path: '/Cadastro',
     name: 'Cadastro',
     component: CadastroView,
+    meta: { hideLayout: true },
     },
     {
     path: '/Login',
@@ -33,9 +36,9 @@ const router = createRouter({
     component: LoginView,
     },
     {
-    path: '/OuvidoriaAdministrativa',
-    name: 'OuvidoriaAdministrativa',
-    component: OuvidoriaAdministrativaView,
+    path: '/ListagemOcorrenciaSetor',
+    name: 'ListagemOcorrenciaSetor',
+    component: ListagemOcorrenciaSetorView,
     },
     {
     path: '/Perfil',
@@ -43,14 +46,14 @@ const router = createRouter({
     component: PerfilView,
     },
     {
-    path: '/Ouvidoria',
-    name: 'Ouvidoria',
-    component: OuvidoriaView,
+    path: '/ListagemOcorrenciaAluno',
+    name: 'ListagemOcorrenciaAluno',
+    component: ListagemOcorrenciaAlunoView,
     },
     {
-      path: '/Ocorrencias',
-      name: 'Ocorrencias',
-      component: OcorrenciaView,
+      path: '/RegistrarOcorrencia',
+      name: 'RegistrarOcorrencia',
+      component: RegistrarOcorrenciaView,
     },
     {
       path: '/DadosPessoais',
