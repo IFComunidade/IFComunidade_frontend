@@ -44,7 +44,7 @@ const activeColor = (path) =>
     <div>
         <ul class="flex gap-5">
                 <li class="">
-                <RouterLink to= "/Cadastro">
+                <RouterLink to= "/Cadastro/Aluno">
                     <BotaoCadastroComponent />
                 </RouterLink>
                 </li>
