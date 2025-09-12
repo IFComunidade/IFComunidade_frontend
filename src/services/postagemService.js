@@ -4,7 +4,7 @@ class PostagemService {
   async getAllPostagem() {
     try {
       const { data } = await api.get('/postagens');
-      return data
+      return data;
     }
     catch(error) {
       console.error('Erro ao buscar postagens:', error);
@@ -15,7 +15,7 @@ class PostagemService {
   async getPostagemByID(id) {
     try {
       const {data} = await api.get(`/postagens/${id}`)
-      return data.results
+      return data;
     } catch (error) {
       console.error(`Erro ao buscar postagem com ID ${id}:`, error);
       throw error;
