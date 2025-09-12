@@ -5,6 +5,7 @@ import OcorrenciaService from '@/services/ocorrenciaService';
 export const useOcorrenciaStore = defineStore('ocorrencia', () => {
 
   const ocorrencias = ref([]);
+  const ocorrenciaSelecionada = ref({});
   const loading = ref(false);
 
   const isLoading = computed(() => loading.value);
@@ -16,6 +17,18 @@ export const useOcorrenciaStore = defineStore('ocorrencia', () => {
       ocorrencias.value = await OcorrenciaService.getAllOcorrencia();
     } catch (error) {
       console.error('Erro ao carregar ocorrências:', error);
+    } finally {
+      loading.value = false;
+    }
+  }
+
+  const getOcorrenciaById = async (id) => {
+    loading.value = true;
+    try {
+      ocorrenciaSelecionada.value = await OcorrenciaService.getOcorrenciaById(id);
+      console.log(ocorrenciaSelecionada.value)
+    } catch (error) {
+      console.error(`Erro ao carregar ocorrência com ID ${id}:`, error);
     } finally {
       loading.value = false;
     }
@@ -76,6 +89,6 @@ export const useOcorrenciaStore = defineStore('ocorrencia', () => {
 
   }
 
-  return { ocorrencias, isLoading, loading, OcorrenciaCount, getOcorrencias, addOcorrencia, attOcorrencia, attParcialmenteOcorrencia, deletarOcorrencia }
+  return { ocorrencias, isLoading, loading, OcorrenciaCount, ocorrenciaSelecionada, getOcorrenciaById, getOcorrencias, addOcorrencia, attOcorrencia, attParcialmenteOcorrencia, deletarOcorrencia }
 
 })
