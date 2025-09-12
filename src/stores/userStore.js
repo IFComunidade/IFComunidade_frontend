@@ -44,7 +44,7 @@ export const useUserStore = defineStore('usuario', () => {
   };
 
   //VERIFICA SE ESTA LOGADO
-   const isLoggedIn = computed(() => !!tokens.value.access);
+  const isLoggedIn = computed(() => !!tokens.value.access);
 
 
   //CADASTRO

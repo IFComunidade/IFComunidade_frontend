@@ -1,16 +1,29 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useUserStore } from '@/stores/userStore'
-// import { AlunosCadastrados } from './matriculas.js'
+import { AlunosCadastrados } from './matriculas';
 
 const userStore = useUserStore();
 const confirmarSenha = ref('');
-// ## const matricula = ref('');
-const tela = ref(1);
+const matricula = ref('');
+let aluno = ref(null);
+
+
+watch(matricula, (nova) => {
+  aluno.value = AlunosCadastrados.find(a => a.matricula === nova) || null
+})
+
 
 async function registrarAluno() {
-  if (!userStore.usuario.password !== confirmarSenha.value) {
-    alert('As senhas não coincidem')
+
+  userStore.usuario.nome = aluno.value.nome
+  userStore.usuario.matricula = aluno.value.matricula
+  userStore.usuario.curso = aluno.value.curso.id
+  userStore.usuario.cpf = aluno.value.cpf
+
+
+  if (userStore.usuario.password !== confirmarSenha.value) {
+    alert('As senhas não coincidem.')
     return
   }
 
@@ -50,8 +63,27 @@ async function registrarAluno() {
 
     <br>
 
-    <button @click="tela + 1">Continuar</button>
+    <div>
+      <label for="matricula">Digite sua matrícula</label>
+      <input type="text" id="matricula" v-model="matricula" placeholder="Matrícula" required />
+    </div>
 
+    <br>
+
+    <div v-if="aluno">
+      Esse é você?
+      <ul>
+        <li>{{ aluno.nome }}</li>
+        <li>{{ aluno.curso.nome }}</li>
+        <li>{{ aluno.matricula }}</li>
+        <li>{{ aluno.cpf }}</li>
+      </ul>
+    </div>
+    <div v-else-if="matricula">
+      Matrícula não encontrada.
+    </div>
+
+    <button type="submit">Registrar</button>
   </form>
 </template>
 
