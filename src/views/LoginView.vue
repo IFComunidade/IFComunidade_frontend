@@ -1,15 +1,43 @@
 <script setup>
 import { ref } from 'vue'
+import { useUserStore } from '@/stores/userStore'
+import { useRouter } from 'vue-router' 
 
-const showPassword = ref(false)
+
+const userStore = useUserStore();
+const showPassword = ref(false);
+const email = ref('');
+const senha = ref('');
+const router = useRouter();
+const senhaIncorreta = ref(false);
 
 function togglePassword() {
   showPassword.value = !showPassword.value
 }
 
-function goHome() {
-  window.location.href = '/'
+// function goHome() {
+  // window.location.href = '/'
+// }
+
+async function login() {
+  senhaIncorreta.value = false
+  try {
+    await userStore.login(email.value, senha.value)
+    alert('Login feito')
+    router.push('/')
+  } catch (error) {
+    console.error(error)
+
+    const status = error?.response?.status || error?.status || null
+    if(status === 401) {
+      senhaIncorreta.value = true
+    }
+    else {
+      alert('Erro ao fazer login')
+    }
+  }
 }
+
 </script>
 
 <template>
@@ -17,22 +45,24 @@ function goHome() {
     <img src="/LogoIFC.png" alt="logo" class="mb-4 mx-auto">
     <h1 class="text-4xl font-bold text-center">Bem-vindo de volta</h1>
 
-    <div class="bg-[#FEFEFE] pt-10 pb-13 mt-12 rounded-lg max-w-2xl mx-auto flex flex-col justify-center items-center">
-      <ul>
-        <li>
-          <p class="mb-2">Email <span class="mdi mdi-email-outline"></span></p>
-          <input
+    <form  @submit.prevent="login()" class="bg-[#FEFEFE] pt-10 pb-13 mt-12 rounded-lg max-w-2xl mx-auto flex flex-col justify-center items-center">
+          
+      <div>
+        <label for="email" class="mb-2">Email <span class="mdi mdi-email-outline"></span></label>
+        <input
+            v-model="email"
             type="email"
+            name="email"
             id="email"
             placeholder="exemplo@gmail.com"
             class="border border-gray-400 rounded py-3 px-3 w-full placeholder-gray-500"
           />
-        </li>
-
-        <li class="mt-4">
-          <p class="mb-2 w-full">Senha <span class="mdi mdi-lock-outline"></span></p>
+      </div>
+          
           <div class="relative w-full">
+            <label for="senha" class="mb-2 w-full">Senha <span class="mdi mdi-lock-outline"></span></label>
             <input
+              v-model="senha"
               :type="showPassword ? 'text' : 'password'"
               name="senha"
               placeholder="Digite sua senha"
@@ -46,23 +76,22 @@ function goHome() {
               <span :class="showPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"></span>
             </span>
           </div>
-        </li>
-        <li>
-          <button
-        @click="goHome"
+          <p v-if="senhaIncorreta">
+            senha incorreta
+          </p>
+
+        <button
+        type="submit"
         class="cursor-pointer w-full bg-[#386641] font-bold text-[#FFFCF7] py-3 border rounded transition-transform duration-200 hover:scale-105 mt-8"
       >
         Continuar <span class="mdi mdi-arrow-right"></span>
       </button>
-        </li>
-      </ul>
 
 
-    </div>
+    </form>
 
      <div class="w-full max-w-2xl mx-auto mt-8 flex justify-start">
     <button
-      @click="goHome"
       class="px-10 py-2 text-[#386641] rounded border border-[#386641] font-bold transition-transform duration-200 hover:scale-105 cursor-pointer"
     >
       <span class="mdi mdi-arrow-left"></span> Voltar
