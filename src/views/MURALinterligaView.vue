@@ -85,20 +85,24 @@ const filtrosFiltrados = computed(() => {
   </section>
 
   <!-- Verificando se está carregando -->
-  <section>
+  <section class="flex flex-col justify-center items-center gap-12">
     <div v-if="postagemStore.isLoading">
       <p>Carregando postagens</p>
     </div>
 
-    <div v-else>
-      <ul>
-        <li v-for="postagem in postagemStore.postagens" :key="postagem.id" class="border-b-2 border-[#386641] p-5 m-5">
-          <h2 class="text-2xl font-bold mb-2">{{ postagem.titulo }}</h2>
-          <p class="mb-4">{{ postagem.descricao }}</p>
-          <p class="text-sm text-gray-600">
+    <div v-else class="bg-red-500 w-400 ">
+      <ul class="">
+        <li v-for="postagem in postagemStore.postagens" :key="postagem.id" class="">
+          <div>
+          <img src="https://www.gravatar.com/avatar/?d=mp" alt="perfilfoto" class="rounded-full w-15 h-15">
+          </div>
+          <h2 class="ml-6 mt-8 font-bold text-2xl">{{ postagem.titulo }}</h2>
+          <p class="mt-10">{{ postagem.descricao }}</p>
+          <p class="mb-20">
             Publicado em: 
             {{ postagem.data ? new Date(postagem.data).toLocaleDateString() : 'Data inválida' }}
           </p>
+        <img v-if="postagem.imagem" :src="postagem.imagem.url" alt="Imagem de Postagem" />
         </li>
       </ul>
     </div>
