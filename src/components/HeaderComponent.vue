@@ -46,7 +46,7 @@ const activeColor = (path) =>
     <div v-if="!userStore.isLoggedIn">
         <ul class="flex gap-5">
                 <li class="">
-                <RouterLink to= "/Cadastro">
+                <RouterLink to= "/Cadastro/Aluno">
                     <BotaoCadastroComponent />
                 </RouterLink>
                 </li>

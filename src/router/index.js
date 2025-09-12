@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import MURALinterligaView from '@/views/MURALinterligaView.vue'
-import CadastroView from '@/views/CadastroView.vue'
+import CadastroAlunoView from '@/views/CadastroAlunoView.vue'
+import CadastroSetorView from '@/views/CadastroSetorView.vue'
 import LoginView from '@/views/LoginView.vue'
 import ListagemOcorrenciaSetorView from '@/views/ListagemOcorrenciaSetorView.vue'
 import PerfilView from '@/views/PerfilView.vue'
@@ -25,9 +26,15 @@ const router = createRouter({
     component: MURALinterligaView,
     },
     {
-    path: '/Cadastro',
-    name: 'Cadastro',
-    component: CadastroView,
+    path: '/Cadastro/Aluno',
+    name: 'CadastroAluno',
+    component: CadastroAlunoView,
+    meta: { hideLayout: true },
+    },
+    {
+    path: '/Cadastro/Setor',
+    name: 'CadastroSetor',
+    component: CadastroSetorView,
     meta: { hideLayout: true },
     },
     {
