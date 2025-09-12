@@ -26,7 +26,7 @@ export const useUserStore = defineStore('usuario', () => {
   const login = async (email, password) => {
     try {
       const data = await userService.login(email, password);
-
+      console.log ( data )
       tokens.value.access = data.access;
       tokens.value.refresh = data.refresh;
 
