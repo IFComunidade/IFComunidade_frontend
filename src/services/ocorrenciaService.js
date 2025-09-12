@@ -1,6 +1,6 @@
 import api from '@/plugins/api'
 
-export default class OcorrenciaService {
+class OcorrenciaService {
   async getAllOcorrencia() {
     try {
       const { data } = await api.get('/ocorrencias');
@@ -61,3 +61,5 @@ export default class OcorrenciaService {
     }
   }
 }
+
+export default new OcorrenciaService();

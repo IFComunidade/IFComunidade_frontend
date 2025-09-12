@@ -4,7 +4,6 @@ class PostagemService {
   async getAllPostagem() {
     try {
       const { data } = await api.get('/postagens');
-      console.log(data)
       return data
     }
     catch(error) {

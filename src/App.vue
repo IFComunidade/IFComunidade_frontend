@@ -12,9 +12,7 @@ const route = useRoute();
     <HeaderComponent v-if="!route.meta.hideLayout" />
 
     <main>
-
         <RouterView />
-
     </main>
 
     <FooterComponent v-if="!route.meta.hideLayout" />
