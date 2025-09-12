@@ -4,7 +4,7 @@ class OpcaoService {
   async getAllOpcao() {
     try {
       const { data } = await api.get('/opcoes');
-      return data.results
+      return data;
     }
     catch(error) {
       console.error('Erro ao buscar opções:', error);
@@ -15,7 +15,7 @@ class OpcaoService {
   async getOpcaoByID(id) {
     try {
       const { data } = await api.get(`/opcoes/${id}`);
-      return data.results;
+      return data;
     } catch (error) {
       console.error(`Erro ao buscar opção com ID ${id}:`, error);
       throw error;

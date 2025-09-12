@@ -4,7 +4,7 @@ class OcorrenciaService {
   async getAllOcorrencia() {
     try {
       const { data } = await api.get('/ocorrencias');
-      return data.results
+      return data
     }
     catch(error) {
       console.error('Erro ao buscar ocorrências:', error);
@@ -15,7 +15,7 @@ class OcorrenciaService {
   async getOcorrenciaById(id) {
     try {
       const { data } = await api.get(`/ocorrencias/${id}`);
-      return data.results;
+      return data;
     } catch (error) {
       console.error(`Erro ao buscar ocorrência com ID ${id}:`, error);
       throw error;
