@@ -1,10 +1,12 @@
 <script setup>
 
 import { useRoute } from 'vue-router'
+import { useUserStore } from '@/stores/userStore';
 import LoginComponent from './LoginComponent.vue';
 import BotaoCadastroComponent from './BotaoCadastroComponent.vue';
 
 const route = useRoute();
+const userStore = useUserStore();
 
 const activeColor = (path) =>
   route.path === path ? 'color: #141414' : 'color: #A7A7A7';
@@ -33,7 +35,7 @@ const activeColor = (path) =>
                      </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to= "/Ocorrencias" :style="activeColor('/Ocorrencias')"
+                    <RouterLink to= "/ListagemOcorrenciaAluno" :style="activeColor('/ListagemOcorrenciaAluno')"
                     class="inline-block transition-transform duration-200 hover:scale-105">
                         Ocorrências
                      </RouterLink>
@@ -41,10 +43,10 @@ const activeColor = (path) =>
             </ul>
         </nav>
     </div>
-    <div>
+    <div v-if="!userStore.isLoggedIn">
         <ul class="flex gap-5">
                 <li class="">
-                <RouterLink to= "/Cadastro">
+                <RouterLink to= "/Cadastro/Aluno">
                     <BotaoCadastroComponent />
                 </RouterLink>
                 </li>
@@ -54,6 +56,11 @@ const activeColor = (path) =>
                 </RouterLink>
                 </li>
         </ul>
+    </div>
+    <div v-else class="flex items-center gap-4">
+      <img :src="userStore.usuario.foto_attachment_key || 'https://www.gravatar.com/avatar/?d=mp'" alt="Foto de perfil" class="w-10 h-10 rounded-full object-cover mr-4">
+      <span>{{ userStore.usuario.nome }}</span>
+      <button @click="userStore.logout()">Sair</button>
     </div>
     </div>
     </header>

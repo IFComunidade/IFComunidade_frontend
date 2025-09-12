@@ -1,13 +1,13 @@
-import api from '@/axios/api'
+import api from '@/plugins/api'
 
-export default class PostagemService {
+class PostagemService {
   async getAllPostagem() {
     try {
-      const {data} = await api.get('/ocorrencias');
-      return data.results
+      const { data } = await api.get('/postagens');
+      return data;
     }
     catch(error) {
-      console.error('Erro ao buscar ocorrências:', error);
+      console.error('Erro ao buscar postagens:', error);
       throw error;
     }
   }
@@ -15,9 +15,9 @@ export default class PostagemService {
   async getPostagemByID(id) {
     try {
       const {data} = await api.get(`/postagens/${id}`)
-      return data.results
+      return data;
     } catch (error) {
-      console.error(`Erro ao buscar ocorrência com ID ${id}:`, error);
+      console.error(`Erro ao buscar postagem com ID ${id}:`, error);
       throw error;
     }
   }
@@ -37,7 +37,7 @@ export default class PostagemService {
         const { data } = await api.put(`/postagens/${id}`, PostagemAtt);
         return data;
       } catch (error) {
-        console.error(`Erro ao atualizar ocorrência com ID ${id}:`, error);
+        console.error(`Erro ao atualizar postagem com ID ${id}:`, error);
         throw error;
       }
     }
@@ -61,3 +61,5 @@ export default class PostagemService {
       }
     }
 }
+
+export default new PostagemService()
