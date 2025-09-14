@@ -31,6 +31,16 @@ class UserService {
     localStorage.removeItem('refreshToken');
     delete api.defaults.headers.common['Authorization'];
   }
+
+  async getAllUsers () {
+    try {
+      const { data } = await api.get('usuarios/');
+      return data;
+    } catch (error) {
+      console.error('Erro ao obter usuários', error);
+      throw error;
+    }
+  }
 }
 
 export default new UserService();
