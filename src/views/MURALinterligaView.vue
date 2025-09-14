@@ -1,15 +1,22 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { usePostagemStore } from '@/stores/postagemStore';
+import { useUserStore } from '@/stores/userStore';
 
 const postagemStore = usePostagemStore();
+const userStore = useUserStore();
 
 onMounted(() => {
   postagemStore.getPostagens();
 });
+onMounted(() => {
+  userStore.getAllUsers();
+});
+const setores = computed(() => {
+  return userStore.users.filter(user => user.tipo == 2);
+});
 
 const mostrarFiltro = ref(false);
-const filtros = ref(['filtro 1', 'filtro 2', 'filtro 3', 'filtro 4', 'filtro 5', 'filtro 6', 'filtro 7', 'filtro 8', 'filtro 9', 'filtro 10']);
 const filtrosSelecionados = ref([]);
 const filtrosSelecionadosTemp = ref([]);
 const pesquisa = ref('');
@@ -26,9 +33,18 @@ const aplicarFiltros = () => {
 };
 
 const filtrosFiltrados = computed(() => {
-  if (!pesquisa.value) return filtros.value;
-  return filtros.value.filter(filtro =>
-    filtro.toLowerCase().includes(pesquisa.value.toLowerCase())
+  if (!pesquisa.value) return setores.value;
+  return setores.value.filter(filtro =>
+    filtro.nome.toLowerCase().includes(pesquisa.value.toLowerCase())
+  );
+});
+
+const postagensFiltradas = computed(() => {
+  if (filtrosSelecionados.value.length === 0) {
+    return postagemStore.postagens;
+  }
+  return postagemStore.postagens.filter(postagem =>
+    filtrosSelecionados.value.some(filtro => filtro.id === postagem.usuario)
   );
 });
 </script>
@@ -40,7 +56,7 @@ const filtrosFiltrados = computed(() => {
         Explore o MURALinterliga!
       </h1>
     </div>
-
+  
     <div class="flex justify-between container mx-auto px-5 mt-10">
       <div>
         <button type="button" class="px-7 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] transition-transform duration-200 hover:scale-105">
@@ -72,7 +88,7 @@ const filtrosFiltrados = computed(() => {
           <div class="space-y-2 max-h-48 overflow-y-auto mb-3">
             <label v-for="filtro in filtrosFiltrados" :key="filtro" class="flex items-center space-x-2">
               <input type="checkbox" :value="filtro" v-model="filtrosSelecionadosTemp" class="accent-[#386641]" />
-              <span class="text-sm">{{ filtro }}</span>
+              <span class="text-sm">{{ filtro.nome }}</span>
             </label>
           </div>
 
@@ -89,17 +105,16 @@ const filtrosFiltrados = computed(() => {
     <div v-if="postagemStore.isLoading">
       <p>Carregando postagens</p>
     </div>
-
     <div v-else class="bg-red-500 w-400 ">
       <ul class="">
-        <li v-for="postagem in postagemStore.postagens" :key="postagem.id" class="">
+        <li v-for="postagem in postagensFiltradas" :key="postagem.id" class="">
           <div>
           <img src="https://www.gravatar.com/avatar/?d=mp" alt="perfilfoto" class="rounded-full w-15 h-15">
           </div>
           <h2 class="ml-6 mt-8 font-bold text-2xl">{{ postagem.titulo }}</h2>
           <p class="mt-10">{{ postagem.descricao }}</p>
           <p class="mb-20">
-            Publicado em: 
+            Publicado em:
             {{ postagem.data ? new Date(postagem.data).toLocaleDateString() : 'Data inválida' }}
           </p>
         <img v-if="postagem.imagem" :src="postagem.imagem.url" alt="Imagem de Postagem" />
