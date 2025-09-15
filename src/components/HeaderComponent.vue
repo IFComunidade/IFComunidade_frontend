@@ -17,7 +17,7 @@ const activeColor = (path) =>
     <header class="mt-5 px-22" >
         <div class="flex items-center justify-between">
         <div>
-        <img src="/public/LogoIFC.png" alt="logo" class="w-[260px] h-[100px]">
+        <img src="/LogoIFC.png" alt="logo" class="w-[260px] h-[100px]">
     </div>
     <div class="flex" >
         <nav>
