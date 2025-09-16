@@ -45,13 +45,13 @@ function emitNext() {
       <p v-if="matricula && !validarMatricula()"  class="text-left text-red-600 text-base mt-1 font-medium"> <span class="mdi mdi-alert-circle"></span> Matrícula inválida.</p>
 
       <BtnContinuarComponent
-      @click="emit('next')"
+      @click="emitNext()"
       :disabled="!validarMatricula()"
       class="mt-5"
       />
 
       <BtnVoltarComponent
-      @click="emitNext()"
+      @click="emit('prev')"
       class="top-90 left-0"
       />
 

@@ -3,22 +3,32 @@ import { ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import BtnContinuarComponent from './BtnContinuarComponent.vue'
 import BtnVoltarComponent from './BtnVoltarComponent.vue'
+import uploadImagem from '@/services/uploadImagem'
 
-const userStore = useUserStore();
-const foto = ref(null);
-const erroMatricula = ref('');
+const userStore = useUserStore()
+const foto = ref(null)
+const erroMatricula = ref('')
+const arquivoFoto = ref(null)
 
 const selecionarFoto = (event) => {
   const file = event.target.files[0]
   if (file) {
+    arquivoFoto.value = file
     foto.value = URL.createObjectURL(file)
-    userStore.usuario.foto = file
+    console.log('Foto selecionada:', file)
   }
 }
 
 async function registrarAluno() {
   try {
     erroMatricula.value = ''
+
+    //FAZ O UPLOAD DA FOTO E PEGA A KEY
+    if (arquivoFoto.value) {
+      const attachmentKey = await uploadImagem.upload(arquivoFoto.value)
+      userStore.usuario.foto_attachment_key = attachmentKey
+    }
+
     await userStore.registrarUsuario(userStore.usuario)
     console.log('Aluno cadastrado com sucesso')
     await userStore.login(userStore.usuario.email, userStore.usuario.password)
@@ -42,7 +52,11 @@ const emit = defineEmits(['next', 'prev'])
     <img src="/LogoIFC.png" alt="logo" class="mb-4" />
     <h1 class="text-4xl font-bold text-center mb-15">Informações finais.</h1>
 
-    <div class="relative flex flex-col justify-center bg-white px-40 py-10 rounded-xl" @keydown.enter="registrarAluno" tabindex="0">
+    <div
+      class="relative flex flex-col justify-center bg-white px-40 py-10 rounded-xl"
+      @keydown.enter="registrarAluno"
+      tabindex="0"
+    >
       <!--ÁREA PARA FOTO-->
 
       <div class="flex flex-col items-center">
@@ -89,7 +103,9 @@ const emit = defineEmits(['next', 'prev'])
         />
       </div>
 
-      <p v-if="erroMatricula" class="text-red-600 text-left mt-2 font-medium"> Já existe um usuário cadastrado com esses dados. </p>
+      <p v-if="erroMatricula" class="text-red-600 text-left mt-2 font-medium">
+        Já existe um usuário cadastrado com esses dados.
+      </p>
 
       <BtnContinuarComponent
         @click="registrarAluno()"

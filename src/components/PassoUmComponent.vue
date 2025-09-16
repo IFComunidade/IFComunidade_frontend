@@ -91,8 +91,7 @@ function emitNext() {
                   :class="
                     req.valido ? 'text-green-600 mdi-check-circle' : 'text-red-600 mdi-close-circle'
                   "
-                ></span>
-                {{ req.requisito }}
+                > {{ req.requisito }} </span>
               </p>
             </li>
           </ul>

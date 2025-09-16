@@ -14,7 +14,8 @@ export const useUserStore = defineStore('usuario', () => {
     curso: null,
     sigla: '',
     tipo: 1,  // 1 - aluno, 2 - setor
-    foto_attachment_key: null,
+    foto: null,
+    foto_attachment_key: ''
   });
 
   const users = ref([]);
