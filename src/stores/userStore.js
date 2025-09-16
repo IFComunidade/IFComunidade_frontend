@@ -16,10 +16,23 @@ export const useUserStore = defineStore('usuario', () => {
     foto_attachment_key: null,
   });
 
+  const users = ref([]);
+
   const tokens = ref({
     access: null,
     refresh: null
   })
+
+  //Pegar todos os usuarios
+  const getAllUsers = async () => {
+    try {
+      users.value = await userService.getAllUsers();
+      console.log(users.value);
+    } catch (error) {
+      console.error('Erro ao obter usuários', error);
+      throw error;
+    }
+  }
 
 
   //LOGIN
@@ -91,6 +104,6 @@ export const useUserStore = defineStore('usuario', () => {
 
 initStore();
 
-  return { usuario, registrarUsuario, login, isLoggedIn, logout };
+  return { usuario, users, getAllUsers, registrarUsuario, login, isLoggedIn, logout };
 
 })
