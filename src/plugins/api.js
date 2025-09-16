@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config) {
     const token = localStorage.getItem('token')
-    const isPublicGet = config.method === 'get' && config.url.includes('/postagens')
+    const isPublicGet = config.method === 'get' && (config.url.includes('/postagens') || config.url.includes('/usuarios'));
     if (token && !isPublicGet) {
       config.headers['Authorization'] = `Bearer ${token}`
     }

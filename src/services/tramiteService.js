@@ -4,7 +4,7 @@ class TramiteService {
   async getAllTramites() {
     try {
       const { data } = await api.get('/tramites');
-      return data.results
+      return data;
     }
     catch(error) {
       console.error('Erro ao buscar ocorrências:', error);
@@ -15,7 +15,7 @@ class TramiteService {
   async getTramiteByID(id) {
     try {
       const { data } = await api.get(`/tramites/${id}`);
-      return data.results;
+      return data;
     } catch (error) {
       console.error(`Erro ao buscar tramite com ID ${id}:`, error);
       throw error;
