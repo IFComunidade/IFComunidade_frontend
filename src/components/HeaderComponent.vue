@@ -35,7 +35,7 @@ const activeColor = (path) =>
                      </RouterLink>
                 </li>
                 <li>
-                    <RouterLink to= "/ListagemOcorrenciaAluno" :style="activeColor('/ListagemOcorrenciaAluno')"
+                    <RouterLink to= "/ListagemOcorrencia" :style="activeColor('/ListagemOcorrencia')"
                     class="inline-block transition-transform duration-200 hover:scale-105">
                         Ocorrências
                      </RouterLink>
