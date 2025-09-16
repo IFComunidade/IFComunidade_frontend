@@ -3,9 +3,8 @@ import HomeView from '@/views/HomeView.vue'
 import MURALinterligaView from '@/views/MURALinterligaView.vue'
 import CadastroView from '@/views/CadastroView.vue'
 import LoginView from '@/views/LoginView.vue'
-import ListagemOcorrenciaSetorView from '@/views/ListagemOcorrenciaSetorView.vue'
 import PerfilView from '@/views/PerfilView.vue'
-import ListagemOcorrenciaAlunoView from '@/views/ListagemOcorrenciaAlunoView.vue'
+import ListagemOcorrenciaView from '@/views/ListagemOcorrenciaView.vue'
 import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import DadosPessoaisView from '@/views/DadosPessoaisView.vue' 
 
@@ -33,19 +32,14 @@ const router = createRouter({
     component: LoginView,
     },
     {
-    path: '/ListagemOcorrenciaSetor',
-    name: 'ListagemOcorrenciaSetor',
-    component: ListagemOcorrenciaSetorView,
-    },
-    {
     path: '/Perfil',
     name: 'Perfil',
     component: PerfilView,
     },
     {
-    path: '/ListagemOcorrenciaAluno',
-    name: 'ListagemOcorrenciaAluno',
-    component: ListagemOcorrenciaAlunoView,
+    path: '/ListagemOcorrencia',
+    name: 'ListagemOcorrencia',
+    component: ListagemOcorrenciaView,
     },
     {
       path: '/RegistrarOcorrencia',
