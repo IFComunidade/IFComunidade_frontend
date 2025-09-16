@@ -1,6 +1,10 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import OcorrenciaService from '@/services/ocorrenciaService';
+import { useUserStore } from './userStore';
+
+const userStore = useUserStore();
+
 
 export const useOcorrenciaStore = defineStore('ocorrencia', () => {
 
@@ -14,7 +18,9 @@ export const useOcorrenciaStore = defineStore('ocorrencia', () => {
   const getOcorrencias = async () => {
     loading.value = true;
     try {
-      ocorrencias.value = await OcorrenciaService.getAllOcorrencia();
+      if(userStore.isLoggedIn) {
+        ocorrencias.value = await OcorrenciaService.getAllOcorrencia();
+      }
     } catch (error) {
       console.error('Erro ao carregar ocorrências:', error);
     } finally {
