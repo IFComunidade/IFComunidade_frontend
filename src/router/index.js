@@ -4,13 +4,13 @@ import MURALinterligaView from '@/views/MURALinterligaView.vue'
 import CadastroAlunoView from '@/views/CadastroAlunoView.vue'
 import CadastroSetorView from '@/views/CadastroSetorView.vue'
 import LoginView from '@/views/LoginView.vue'
-import ListagemOcorrenciaSetorView from '@/views/ListagemOcorrenciaSetorView.vue'
 import PerfilView from '@/views/PerfilView.vue'
 // import OuvidoriaView from '@/views/OuvidoriaView.vue'
 // import OcorrenciaView from '@/views/OcorrenciaView.vue'
 import ListagemOcorrenciaAlunoView from '@/views/ListagemOcorrenciaAlunoView.vue'
 import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import DadosPessoaisView from '@/views/DadosPessoaisView.vue'
+import CadastroPostagem from '@/views/CadastroPostagem.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +24,11 @@ const router = createRouter({
     path: '/MURALinterliga',
     name: 'MURALinterliga',
     component: MURALinterligaView,
+    },
+    {
+      path: '/Criar/Postagem',
+      name: 'CriarPostagem',
+      component: CadastroPostagem,
     },
     {
     path: '/Cadastro/Aluno',
@@ -42,11 +47,6 @@ const router = createRouter({
     name: 'Login',
     component: LoginView,
     meta: { hideLayout: true },
-    },
-    {
-    path: '/ListagemOcorrenciaSetor',
-    name: 'ListagemOcorrenciaSetor',
-    component: ListagemOcorrenciaSetorView,
     },
     {
     path: '/Perfil',

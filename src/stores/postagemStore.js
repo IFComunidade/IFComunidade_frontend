@@ -4,6 +4,15 @@ import PostagemService from '@/services/postagemService';
 
 export const usePostagemStore = defineStore('postagem', () => {
 
+    const postagem = ref({
+    imagem: null,
+    titulo: '',
+    descricao: '',
+    tipo_postagem: 'A',
+    data: '',
+    usuario: '',
+  });
+
     const postagens = ref([]);
     const loading = ref(false);
 
@@ -77,5 +86,5 @@ export const usePostagemStore = defineStore('postagem', () => {
 
     }
 
-    return { postagens, isLoading, loading, PostagemCount, getPostagens, addPostagem, attPostagem, attParcialmentePostagem, deletarPostagem }
+    return { postagem, postagens, isLoading, loading, PostagemCount, getPostagens, addPostagem, attPostagem, attParcialmentePostagem, deletarPostagem }
 })

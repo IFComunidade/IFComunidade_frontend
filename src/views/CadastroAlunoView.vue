@@ -211,7 +211,7 @@ function goHome() {
               <option value="1" class="text-gray-500 cursor-pointer">
                 Informática para Internet
               </option>
-              <option value="2" class="text-gray-500 cursor-pointer">Agropecuária</option>
+              <option value="2" class="text-gray-500 cursor-pointer">Agropecu1ária</option>
               <option value="3" class="text-gray-500 cursor-pointer">Química</option>
             </select>
           </li>

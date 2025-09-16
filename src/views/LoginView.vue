@@ -16,29 +16,21 @@ function togglePassword() {
 }
 
 async function login() {
-  // reseta flag de erro
   senhaIncorreta.value = false
 
   try {
-    // chama o login da store (supondo que retorne uma Promise)
     const result = await userStore.login(email.value, senha.value)
     console.log('Login sucesso ->', result)
 
-    // navega para home sem recarregar a página
     await router.push('/')
   } catch (error) {
     console.error('Erro do login:', error)
 
-    // tenta identificar status (axios, fetch, etc.)
     const status = error?.response?.status || error?.status || null
 
     if (status === 401) {
-      // credenciais incorretas
       senhaIncorreta.value = true
     } else {
-      // erro genérico (pode ser rede, servidor, etc.)
-      // mostramos a mensagem de senha incorreta por compatibilidade com seu layout
-      // ou você pode mostrar um alert com detalhes
       console.warn('Erro inesperado no login, status:', status)
       senhaIncorreta.value = true
     }
@@ -51,9 +43,7 @@ async function login() {
     <img src="/LogoIFC.png" alt="logo" class="mb-4 mx-auto" />
     <h1 class="text-4xl font-bold text-center">Bem-vindo de volta</h1>
 
-    <!-- fundo maior (wrapper) -->
     <div class="bg-[#FEFEFE] mx-auto max-w-[600px] rounded flex justify-center mt-12">
-      <!-- form interno mantém a mesma largura visual -->
       <form @submit.prevent="login()" class="pb-15 mt-12 mt-15 rounded-lg max-w-[300px] mx-auto flex flex-col gap-3 w-full">
         <div class="w-full">
           <label for="email" class="mb-1 block">Email <span class="mdi mdi-email-outline"></span></label>
@@ -109,7 +99,3 @@ async function login() {
     </div>
   </section>
 </template>
-
-<style scoped>
-/* nada especial aqui */
-</style>
