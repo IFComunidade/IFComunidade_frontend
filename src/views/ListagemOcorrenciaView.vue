@@ -1,14 +1,28 @@
 <script setup>
 import { ref } from 'vue';
+import { useOcorrenciaStore } from '@/stores/ocorrenciaStore';
+import { onMounted } from 'vue';
+//import { useRouter } from 'vue-router';
+
+const ocorrenciaStore = useOcorrenciaStore();
+// const router = useRouter();
+
+onMounted(() => {
+  ocorrenciaStore.getOcorrencias();
+});
+
 function click(){
 alert("clicou")
 }
+
 const pesquisa = ref('');
+
+
 </script>
 
 <template>
-  <section class="px-22 flex flex-col justify-start min-h-screen">
-  
+  <section class="px-22 flex flex-col justify-start min-h-screen" >
+
     <div class="flex gap-6 mt-20 mb-15">
       <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
       <h1 class="text-[#386641] text-3xl font-bold">Suas Ocorrências</h1>
@@ -35,9 +49,9 @@ const pesquisa = ref('');
         />
       </div>
     </div>
+Suas Ocorrências
 
-
-    <div class="overflow-x-auto mt-8">
+    <div class="overflow-x-auto mt-8" v-for="ocorrencia in ocorrenciaStore.ocorrencias" :key="ocorrencia.id">
       <table class="min-w-full rounded-md shadow-sm bg-inherit text-inherit">
         <thead class="text-left border-b-2 border-gray-200">
           <tr class="text-[#386641]">
@@ -49,7 +63,7 @@ const pesquisa = ref('');
           </tr>
         </thead>
         <tbody class="text-inherit">
-          
+
           <tr @click="click()">
             <td class="py-4 px-4">
               <p class="text-xl">Insatisfação relacionada ao planejamento acadêmico</p>
