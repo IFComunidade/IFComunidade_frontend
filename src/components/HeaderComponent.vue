@@ -17,7 +17,7 @@ const activeColor = (path) =>
     <header class="mt-5 px-22" >
         <div class="flex items-center justify-between">
         <div>
-        <img src="/public/LogoIFC.png" alt="logo" class="w-[260px] h-[100px]">
+        <img src="/LogoIFC.png" alt="logo" >
     </div>
     <div class="flex" >
         <nav>
@@ -58,7 +58,7 @@ const activeColor = (path) =>
         </ul>
     </div>
     <div v-else class="flex items-center gap-4">
-      <img :src="userStore.usuario.foto_attachment_key || 'https://www.gravatar.com/avatar/?d=mp'" alt="Foto de perfil" class="w-10 h-10 rounded-full object-cover mr-4">
+      <img :src="userStore.usuario.foto?.url || 'https://www.gravatar.com/avatar/?d=mp'" alt="Foto de perfil" class="w-10 h-10 rounded-full object-cover mr-4">
       <span>{{ userStore.usuario.nome }}</span>
       <button @click="userStore.logout()">Sair</button>
     </div>
