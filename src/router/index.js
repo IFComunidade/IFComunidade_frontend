@@ -9,6 +9,7 @@ import ListagemOcorrenciaView from '@/views/ListagemOcorrenciaView.vue'
 import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import DadosPessoaisView from '@/views/DadosPessoaisView.vue'
 import CadastroPostagem from '@/views/CadastroPostagem.vue'
+import DadosDaOcorrencia from '@/views/DadosDaOcorrencia.vue'   
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -83,8 +84,14 @@ const router = createRouter({
     },
     {
       path: '/testandoListagem/:id',
-      name: 'testandoListagemId',
+      name: 'testandoListaOcorrenciagemId',
       component: () => import('@/utils/ocorrenciaDetails.vue'),
+      props: true,
+    },
+    {
+      path: '/Ocorrencia',
+      name: 'Ocorrencia',
+        component: DadosDaOcorrencia,
       props: true,
     }
   ],
