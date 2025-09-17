@@ -14,7 +14,7 @@ const selecionarOpcao = (opcao) => {
 </script>
 
 <template>
-  <ul class="flex gap-40 border-b-2 border-[#386641] w-full">
+  <ul class="flex gap-40 w-full">
     <li @click="selecionarOpcao('recebidos')"  :class="['flex gap-2 text-xl font-medium cursor-pointer pb-2', opcaoSelecionada === 'recebidos' ? 'border-b-3 border-[#386641]' : '']"
     >
       <span class="mdi mdi-email-outline"></span>

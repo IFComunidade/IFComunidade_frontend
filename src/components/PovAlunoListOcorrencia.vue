@@ -1,15 +1,19 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useOcorrenciaStore } from '@/stores/ocorrenciaStore'
 
 const ocorrenciaStore = useOcorrenciaStore()
 
-onMounted(() => {
-  ocorrenciaStore.getOcorrencias()
-  console.log(ocorrenciaStore.ocorrencias)
+const busca = ref('');
+
+const ocorrencias = computed(() => {
+  return ocorrenciaStore.ocorrencias.filter(o => o.titulo.toLowerCase().includes(busca.value.toLowerCase()))
 })
 
+onMounted(() => {
+  ocorrenciaStore.getOcorrencias()
+})
 </script>
 
 <template>
@@ -31,13 +35,16 @@ onMounted(() => {
         </button>
       </RouterLink>
 
-      <div class="relative flex-grow max-w-[300px]">
-        <span class="mdi mdi-magnify absolute top-2 left-43 text-gray-500"></span>
+      <div class="flex gap-3 bg-[#F1F1F1] px-2 py-1 items-center">
+        <label for="pesquisa">
+          <span class="mdi mdi-magnify text-[#A6A6A6] text-lg"></span>
+        </label>
         <input
           type="text"
-          v-model="pesquisa"
-          placeholder="Buscar Ocorrência"
-          class="bg-[#F1F1F1] text-sm placeholder:text-xs py-2 focus:outline-none focus:ring-0 pl-6"
+          id="pesquisa"
+          placeholder="Buscar ocorrência"
+          v-model="busca"
+          class="flex-1 outline-none bg-transparent"
         />
       </div>
     </div>
@@ -54,7 +61,7 @@ onMounted(() => {
         </thead>
         <tbody class="text-inherit">
           <tr
-            v-for="ocorrencia in ocorrenciaStore.ocorrencias"
+            v-for="ocorrencia in ocorrencias"
             class="hover:bg-[#DEFFEA] transition-all duration-200 cursor-pointer"
             :key="ocorrencia.id"
           >
