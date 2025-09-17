@@ -25,8 +25,9 @@
     tramiteStore.tramite.autor = userStore.usuario.id;
     tramiteStore.tramite.ocorrencia = ocorrenciaStore.ocorrenciaSelecionada.id;
 
+    console.log(tramiteStore.tramites)
+
     await tramiteStore.addTramite(tramiteStore.tramite)
-    console.log(tramiteStore.tramite)
   }
 </script>
 <template>
@@ -35,7 +36,7 @@
     <p>ID da Ocorrência: {{ ocorrenciaStore.ocorrenciaSelecionada.titulo }}</p>
   </div>
   <div>
-    <p v-for="tramite in tramiteStore.tramites" :key="tramite.id">{{ tramite.resposta }}</p>
+    <p v-for="tramite in tramiteStore.tramites.filter(t => t.ocorrencia === ocorrenciaStore.ocorrenciaSelecionada.id)" :key="tramite.id" >{{ tramite.id }} - {{ tramite.resposta }}</p>
   </div>
   <div>
     <label for="resposta">Resposta:</label>

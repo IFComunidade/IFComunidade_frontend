@@ -4,7 +4,7 @@ class TramiteService {
   async getAllTramites() {
     try {
       const { data } = await api.get('/tramites');
-      return data.results;
+      return data;
     }
     catch(error) {
       console.error('Erro ao buscar ocorrências:', error);
