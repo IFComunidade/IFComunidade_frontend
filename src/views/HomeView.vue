@@ -60,15 +60,17 @@ onMounted(() => {
             </li>
         </ul>
     </div>
-    <div class="bg-[#9ACCAC] mx-70 pt-100 mt-30 px-25 rounded-[6rem] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.3)]">
+    <div class="bg-[#9ACCAC] mx-40 pt-100 mt-30 px-25 rounded-[6rem] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.3)] relative">
         <h1 class="text-[#386641] font-semibold -mt-84 text-[1.6rem]">Acompanhe as ideias que movimentam o campus! </h1>
-        <p class="text-[#FFFCF7] mt-8 w-160 text-[1.2rem]">Mergulhe nas ideias, vozes e iniciativas que movimentam os projetos do IFC. No MURALinterliga, você acompanha de perto tudo o que está acontecendo no campus.</p>
-            <RouterLink to="/MURALinterliga" class="inline-flex items-center gap-2 bg-[#386641] text-[#FFFCF7] flex gap-1 mt-12 p-2 px-5 text-[0.9rem] font-bold transition-all duration-500 hover:scale-103 hover:bg-[#29452E] hover:gap-3 hover:shadow-lg">
+        <p class="text-[#FFFCF7] mt-8 w-150 text-[1.2rem]">Mergulhe nas ideias, vozes e iniciativas que movimentam os projetos do IFC. No MURALinterliga, você acompanha de perto tudo o que está acontecendo no campus.</p>
+            <RouterLink to="/MURALinterliga" class="inline-flex items-center gap-2 bg-[#386641] text-[#FFFCF7] flex mt-12 p-2 px-5 text-[0.9rem] font-bold transition-transform duration-200 hover:scale-105">
                 <span>Acessar o MURALinterliga</span>
                 <img src="/seta.png" alt="seta">
             </RouterLink>
     </div>
-    <img src="/marketing.png" alt="marketingmegafone" class="w-150 h-150 ml-auto mr-75 -mt-110 -mb-24">
+
+    <img src="/marketing.png" alt="marketingmegafone" class="w-150 h-150 ml-auto absolute right-25 bottom-10 ">
+
     </section>
 </template>
 

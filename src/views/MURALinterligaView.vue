@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { usePostagemStore } from '@/stores/postagemStore';
 import { useUserStore } from '@/stores/userStore';
+import { RouterLink } from 'vue-router';
 
 const postagemStore = usePostagemStore();
 const userStore = useUserStore();
@@ -58,11 +59,14 @@ const postagensFiltradas = computed(() => {
     </div>
 
     <div class="flex justify-between container mx-auto px-5 mt-10">
-      <div>
+      <div v-if="userStore.usuario.tipo == 2">
+        <router-link to="/Criar/Postagem">
         <button type="button"
-          class="px-7 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] transition-transform duration-200 hover:scale-105">
+          class="px-7 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] transition-transform duration-200 hover:scale-105" >
           Criar +
         </button>
+        </router-link>
+
       </div>
 
       <div class="relative hover:underline cursor-pointer">
