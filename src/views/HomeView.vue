@@ -1,7 +1,9 @@
 <script setup>
 import {ref, onMounted} from 'vue';
 import LoginComponent from '@/components/LoginComponent.vue';
+import { useUserStore } from '@/stores/userStore';
 
+const useStore = useUserStore();
 const lista = ['Informe...', 'Comunique...', 'Compartilhe...', 'Descubra...'];
 const index = ref(0);
 
@@ -18,7 +20,7 @@ onMounted(() => {
         <div class="grid place-items-center px-22">
         <h1 class=" text-3xl font-bold text-[#141414] leading-normal">Conecte-se com o IFC e  fortaleça a comunidade:</h1>
         <p class="text-[1.8rem] font-semibold text-[#509973] mr-10">{{ lista[index] }}</p>
-         <RouterLink to= "/Login">
+         <RouterLink to= "/Login" v-if="!useStore.isLoggedIn">
             <LoginComponent class="px-12 mr-12 mt-5"/>
         </RouterLink>
     </div>
