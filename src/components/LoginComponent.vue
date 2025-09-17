@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <button type="button" class="px-9 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] transition-transform duration-200 hover:scale-105" >
+    <button type="button" class="px-10 py-2 bg-[#386641] text-white mb-5 p-2 rounded cursor-pointer font-bold transition-all duration-500 hover:scale-103 hover:bg-[#29452E] hover:gap-3 hover:shadow-lg" >
         Entrar
     </button>
 </template>

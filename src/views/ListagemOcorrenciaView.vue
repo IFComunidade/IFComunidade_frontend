@@ -8,7 +8,7 @@ const pesquisa = ref('');
 
 <template>
   <section class="px-22 flex flex-col justify-start min-h-screen">
-  
+
     <div class="flex gap-6 mt-20 mb-15">
       <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
       <h1 class="text-[#386641] text-3xl font-bold">Suas Ocorrências</h1>
@@ -19,7 +19,7 @@ const pesquisa = ref('');
       <RouterLink to="/RegistrarOcorrencia">
         <button
           type="button"
-          class="px-6 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] transition-transform duration-200 hover:scale-105"
+          class="px-6 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] cursor-pointer transition-all duration-500 hover:scale-103 hover:bg-[#29452E] hover:gap-3 hover:shadow-lg"
         >
           Registrar
         </button>
@@ -49,7 +49,7 @@ const pesquisa = ref('');
           </tr>
         </thead>
         <tbody class="text-inherit">
-          
+
           <tr @click="click()">
             <td class="py-4 px-4">
               <p class="text-xl">Insatisfação relacionada ao planejamento acadêmico</p>

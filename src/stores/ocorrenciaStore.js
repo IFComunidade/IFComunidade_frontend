@@ -3,14 +3,26 @@ import { defineStore } from 'pinia';
 import OcorrenciaService from '@/services/ocorrenciaService';
 import { useUserStore } from './userStore';
 
-const userStore = useUserStore();
 
 
 export const useOcorrenciaStore = defineStore('ocorrencia', () => {
 
+  const userStore = useUserStore();
   const ocorrencias = ref([]);
   const ocorrenciaSelecionada = ref({});
   const loading = ref(false);
+
+  const ocorrencia = ref({
+    imagem_attachment_key: '',
+    tipo: null,
+    titulo:'',
+    texto: '',
+    categoria: '',
+    status: 1,
+    anonima: true,
+    setor: null,
+    usuario: null,
+  })
 
   const isLoading = computed(() => loading.value);
   const OcorrenciaCount = computed(() => ocorrencias.value.length);
@@ -95,6 +107,6 @@ export const useOcorrenciaStore = defineStore('ocorrencia', () => {
 
   }
 
-  return { ocorrencias, isLoading, loading, OcorrenciaCount, ocorrenciaSelecionada, getOcorrenciaById, getOcorrencias, addOcorrencia, attOcorrencia, attParcialmenteOcorrencia, deletarOcorrencia }
+  return { ocorrencias, ocorrencia, isLoading, loading, OcorrenciaCount, ocorrenciaSelecionada, getOcorrenciaById, getOcorrencias, addOcorrencia, attOcorrencia, attParcialmenteOcorrencia, deletarOcorrencia }
 
 })
