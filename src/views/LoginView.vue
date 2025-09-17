@@ -16,12 +16,12 @@ function togglePassword() {
 }
 
 async function login() {
-
   senhaIncorreta.value = false
 
   try {
     const result = await userStore.login(email.value, senha.value)
     console.log('Login sucesso ->', result)
+    
     await router.push('/')
   } catch (error) {
     console.error('Erro do login:', error)
@@ -42,6 +42,7 @@ async function login() {
   <section class="mt-20">
     <img src="/LogoIFC.png" alt="logo" class="mb-4 mx-auto" />
     <h1 class="text-4xl font-bold text-center">Bem-vindo de volta</h1>
+
     <div class="bg-[#FEFEFE] mx-auto max-w-[600px] rounded flex justify-center mt-12">
       <form @submit.prevent="login()" class="pb-15 mt-12 mt-15 rounded-lg max-w-[300px] mx-auto flex flex-col gap-3 w-full">
         <div class="w-full">
@@ -92,5 +93,3 @@ async function login() {
     </div>
   </section>
 </template>
-<style scoped>
-</style>

@@ -27,7 +27,6 @@ function prevStep() {
 </script>
 
 <template>
-
   <PassoUmComponent
   v-if="currentStep === 1"
   v-model:email="userStore.usuario.email"
