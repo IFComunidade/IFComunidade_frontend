@@ -86,6 +86,12 @@ const router = createRouter({
       name: 'testandoListagemId',
       component: () => import('@/utils/ocorrenciaDetails.vue'),
       props: true,
+    },
+    {
+      path: '/Ocorrencia/:id',
+      name: 'Ocorrencia',
+      component: () => import('@/utils/DadosDaOcorrencia.vue'),
+      props: true,
     }
   ],
 })
