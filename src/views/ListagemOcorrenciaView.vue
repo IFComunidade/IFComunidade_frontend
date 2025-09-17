@@ -1,19 +1,19 @@
 <script setup>
 import { ref } from 'vue'
+import { useUserStore } from '@/stores/userStore'
 import { useOcorrenciaStore } from '@/stores/ocorrenciaStore'
 import { onMounted } from 'vue'
 //import { useRouter } from 'vue-router';
 
 const ocorrenciaStore = useOcorrenciaStore()
+const userStore = useUserStore()
+
 // const router = useRouter();
 
 onMounted(() => {
   ocorrenciaStore.getOcorrencias()
+  console.log(ocorrenciaStore.ocorrencias)
 })
-
-function click() {
-  alert('clicou')
-}
 
 const pesquisa = ref('')
 </script>
@@ -45,41 +45,35 @@ const pesquisa = ref('')
         />
       </div>
     </div>
-    Suas Ocorrências
 
-    <div
-      class="overflow-x-auto mt-8"
-      v-for="ocorrencia in ocorrenciaStore.ocorrencias"
-      :key="ocorrencia.id"
-    >
-      <table class="min-w-full rounded-md shadow-sm bg-inherit text-inherit">
-        <thead class="text-left border-b-2 border-gray-200">
-          <tr class="text-[#386641]">
-            <th class="py-3 px-4 font-bold">Título</th>
-            <th class="py-3 px-4 font-bold">Tipo Ocorrência</th>
-            <th class="py-3 px-4 font-bold">Categoria</th>
-            <th class="py-3 px-4 font-bold">Status</th>
-            <th class="py-3 px-4 font-bold"></th>
+    <div>
+      <table>
+        <thead>
+          <tr scope="col">
+            Título
+          </tr>
+          <tr scope="col">
+            Tipo Ocorrência
+          </tr>
+          <tr scope="col">
+            Categoria
+          </tr>
+          <tr v-if="userStore.usuario.tipo === 1">
+            Status
+          </tr>
+          <tr v-if="userStore.usuario.tipo === 2">
+            Data
           </tr>
         </thead>
-        <tbody class="text-inherit">
-          <tr @click="click()">
-            <td class="py-4 px-4">
-              <p class="text-xl">Insatisfação relacionada ao planejamento acadêmico</p>
-              <div class="text-sm text-gray-500">@pontofrio</div>
-            </td>
-            <td class="py-4 px-4">
-              <span class="bg-[#E6F0EC] text-[#2E5939] text-sm px-3 py-1 rounded-full font-medium">
-                Queixa
-              </span>
-            </td>
-            <td class="py-4 px-4">Planejamento Acadêmico</td>
-            <td class="py-4 px-4">
-              <div class="flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-[#2E5939]"></div>
-                <span>Entregue</span>
-              </div>
-            </td>
+
+        <tbody>
+          <tr v-for="ocorrencia in ocorrenciaStore.ocorrencias" :key="ocorrencia.id">
+            <td>{{ ocorrencia.titulo }}</td>
+            <td>{{ ocorrencia.tipo_display }}</td>
+            <td>{{ ocorrencia.categoria }}</td>
+            <!-- se quiser mostrar nome, precisa mapear o ID -->
+            <td v-if="userStore.usuario.tipo === 1">{{ ocorrencia.status }}</td>
+            <td v-if="userStore.usuario.tipo === 2">{{ ocorrencia.created_at }}</td>
           </tr>
         </tbody>
       </table>

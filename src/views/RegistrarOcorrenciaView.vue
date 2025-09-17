@@ -32,15 +32,28 @@ async function registrarPostagem() {
   tipoMensagem.value = ''
   modalAberto.value = false
 
-  if (arquivoImagem.value) {
-    const attachmentKey = await uploadImagem.upload(arquivoImagem.value)
-    ocorrenciaStore.ocorrencia.imagem_attachment_key = attachmentKey
+  if (
+    !ocorrenciaStore.ocorrencia.titulo ||
+    !ocorrenciaStore.ocorrencia.tipo ||
+    !ocorrenciaStore.ocorrencia.categoria ||
+    !ocorrenciaStore.ocorrencia.setor ||
+    !ocorrenciaStore.ocorrencia.texto
+  ) {
+    mensagem.value = 'Por favor, preencha todos os campos.'
+    tipoMensagem.value = 'erro'
+    modalAberto.value = true
+    return
   }
 
-  ocorrenciaStore.ocorrencia.anonima = anonima.value
-  ocorrenciaStore.ocorrencia.usuario = userStore.usuario.id
-
   try {
+    if (arquivoImagem.value) {
+      const attachmentKey = await uploadImagem.upload(arquivoImagem.value)
+      ocorrenciaStore.ocorrencia.imagem_attachment_key = attachmentKey
+    }
+
+    ocorrenciaStore.ocorrencia.anonima = anonima.value
+    ocorrenciaStore.ocorrencia.usuario = userStore.usuario.id
+
     await ocorrenciaStore.addOcorrencia(ocorrenciaStore.ocorrencia)
 
     mensagem.value = 'Ocorrência cadastrada com sucesso.'
@@ -52,24 +65,27 @@ async function registrarPostagem() {
       router.push('/ListagemOcorrencia')
     }, 1500)
   } catch (error) {
-    console.error('Erro ao registrar nova ocorrencia', error)
-    mensagem.value = 'Erro ao registrar a ocorrência. Tente novamente.'
+    if (error.response) {
+      console.error('Erro ao registrar nova ocorrencia:', error.response.data)
+      mensagem.value = `Erro: ${JSON.stringify(error.response.data)}`
+    } else {
+      console.error('Erro desconhecido:', error)
+      mensagem.value = 'Erro desconhecido ao registrar ocorrência.'
+    }
+
     tipoMensagem.value = 'erro'
     modalAberto.value = true
   }
 }
 </script>
 
+
 <template>
   <section class="px-22 flex flex-col justify-start min-h-screen">
     <div class="flex gap-6 mt-20 mb-15">
       <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
       <h1 class="text-[#386641] text-3xl font-bold">
-
-      <RouterLink to="/ListagemOcorrencia">
-        Registrar Ocorrência
-      </RouterLink>
-
+        <RouterLink to="/ListagemOcorrencia"> Registrar Ocorrência </RouterLink>
       </h1>
     </div>
     <div>
@@ -220,13 +236,8 @@ async function registrarPostagem() {
     </form>
 
     <!-- Modal de mensagem -->
-    <div
-      v-if="modalAberto"
-      class="fixed inset-0 flex items-center justify-center bg-black/40 z-50"
-    >
-      <div
-        class="bg-white rounded-lg p-8 w-96 text-center shadow-lg"
-      >
+    <div v-if="modalAberto" class="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+      <div class="bg-white rounded-lg p-8 w-96 text-center shadow-lg">
         <p class="text-lg font-semibold mb-4">{{ mensagem }}</p>
         <button
           @click="modalAberto = false"
