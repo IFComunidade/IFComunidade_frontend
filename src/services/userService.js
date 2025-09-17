@@ -18,7 +18,14 @@ class UserService {
 
   async registro (user) {
     try{
-      const { data } = await api.post('usuarios/', user)
+
+      const dados = {...user}
+
+      if(!dados.foto) {
+        delete dados.foto
+      }
+
+      const { data } = await api.post('usuarios/', dados)
       return data;
     } catch (error) {
       console.error('Erro ao registrar usuário', error);

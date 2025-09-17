@@ -3,9 +3,11 @@
 </script>
 
 <template>
-    <footer class="px-22 bg-[#386641] text-[#FFFCF7] flex justify-between items-center">
+    <footer class="px-22 bg-[#386641] text-[#FFFCF7] flex justify-between items-center mt-10">
         <div>
-            <img src="/public/LogoFooter.png" alt="Logo">
+          <RouterLink to="/">
+            <img src="/LogoFooter.png" alt="Logo">
+          </RouterLink>
         </div>
         <div>
             <p>2025 &copy; IFComunidade</p>
@@ -16,4 +18,3 @@
         </div>
     </footer>
 </template>
-

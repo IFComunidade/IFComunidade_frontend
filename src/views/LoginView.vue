@@ -21,7 +21,7 @@ async function login() {
   try {
     const result = await userStore.login(email.value, senha.value)
     console.log('Login sucesso ->', result)
-
+    
     await router.push('/')
   } catch (error) {
     console.error('Erro do login:', error)
@@ -55,7 +55,6 @@ async function login() {
             class="border border-gray-400 rounded py-2 px-3 w-full placeholder-gray-500"
           />
         </div>
-
         <div class="relative w-full">
           <label for="senha" class="mb-1 block">Senha <span class="mdi mdi-lock-outline"></span></label>
           <input
@@ -72,13 +71,10 @@ async function login() {
             <span :class="showPassword ? 'mdi mdi-eye-off' : 'mdi mdi-eye'"></span>
           </span>
         </div>
-
-        <!-- mensagem de erro corrigida -->
         <p v-if="senhaIncorreta" class="text-red-600 text-sm mt-1 mb-2 w-full text-left flex items-center gap-2">
           <span class="mdi mdi-alert-circle-outline"></span>
           Senha incorreta!
         </p>
-
         <button
           type="submit"
           class="w-full bg-[#386641] text-white font-bold py-2 rounded transition-transform duration-200 hover:scale-105 mt-2 cursor-pointer"
@@ -87,8 +83,6 @@ async function login() {
         </button>
       </form>
     </div>
-
-    <!-- voltar alinhado à esquerda do fundo branco -->
     <div class="w-full max-w-[600px] mx-auto mt-6 flex justify-start">
       <button
         class="px-6 py-2 text-[#386641] rounded border border-[#386641] font-bold transition-transform duration-200 hover:scale-105 cursor-pointer"

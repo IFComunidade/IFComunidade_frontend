@@ -116,6 +116,8 @@ const postagensFiltradas = computed(() => {
     <div v-if="postagemStore.isLoading">
       <p>Carregando postagens</p>
     </div>
+
+    <!--Postagens carregadas-->
     <div v-else class="max-w-3xl mx-auto p-6">
       <ul>
         <li v-for="postagem in postagensFiltradas" :key="postagem.id" class="border-b-1 border-[#386641] mb-6 pb-6">

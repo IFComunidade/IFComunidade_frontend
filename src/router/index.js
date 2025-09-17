@@ -5,9 +5,7 @@ import CadastroAlunoView from '@/views/CadastroAlunoView.vue'
 import CadastroSetorView from '@/views/CadastroSetorView.vue'
 import LoginView from '@/views/LoginView.vue'
 import PerfilView from '@/views/PerfilView.vue'
-// import OuvidoriaView from '@/views/OuvidoriaView.vue'
-// import OcorrenciaView from '@/views/OcorrenciaView.vue'
-import ListagemOcorrenciaAlunoView from '@/views/ListagemOcorrenciaAlunoView.vue'
+import ListagemOcorrenciaView from '@/views/ListagemOcorrenciaView.vue'
 import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import DadosPessoaisView from '@/views/DadosPessoaisView.vue'
 import CadastroPostagem from '@/views/CadastroPostagem.vue'
@@ -54,9 +52,9 @@ const router = createRouter({
     component: PerfilView,
     },
     {
-    path: '/ListagemOcorrenciaAluno',
-    name: 'ListagemOcorrenciaAluno',
-    component: ListagemOcorrenciaAlunoView,
+    path: '/ListagemOcorrencia',
+    name: 'ListagemOcorrencia',
+    component: ListagemOcorrenciaView,
     },
     {
       path: '/RegistrarOcorrencia',
