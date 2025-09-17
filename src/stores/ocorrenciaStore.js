@@ -13,6 +13,7 @@
     const loading = ref(false);
 
     const ocorrencia = ref({
+      id:'',
       imagem_attachment_key: null,
       tipo: null,
       titulo:'',
