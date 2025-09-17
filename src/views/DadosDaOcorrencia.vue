@@ -1,5 +1,7 @@
 <script setup>
-
+function enviar(){
+    alert('enviar')
+}
 </script>
 
 <template>
@@ -36,10 +38,10 @@
                     <li>
                         <p class="text-[#A7A7A7] text-xl mb-2">Controles</p>
                         <form action="">
-                            <ul>
+                            <ul class="w-75">
                                 <li class="mb-2">
                                     <input type="radio" name="status" id="analise" class="mr-1">
-                                    <label for="analise">Marcar como “Em análise” <span
+                                    <label for="analise" class="accent-[#386641]">Marcar como “Em análise” <span
                                             class="mdi mdi-email-fast-outline"></span></label>
                                 </li>
                                 <li class="mb-2">
@@ -58,7 +60,7 @@
 
                 </ul>
             </div>
-            <div class="ml-35">
+            <div class="ml-25">
                 <div class="border-b-1 border-[#386641]">
                     <div class="flex">
                         <img src="https://www.gravatar.com/avatar/?d=mp" class="rounded-full w-10 h-10">
@@ -71,7 +73,7 @@
                         Olá, venho registrar minha insatisfação em relação ao planejamento acadêmico deste semestre. As
                         mudanças de datas e horários de aulas têm acontecido com pouca antecedência e sem comunicação
                         clara, o que está dificultando muito a organização da minha rotina, principalmente para quem
-                        trabalha ou depende de transporte. Entendo que imprevistos acontecem, mas acredito que uma
+                        trabalha ou depende de transporte. Entendo que imprevistos acontecem, mas acredito que um
                         comunicação mais transparente e um planejamento mais estável seriam fundamentais para evitar
                         prejuízos ao nosso desempenho acadêmico.
                     </p>
@@ -91,7 +93,8 @@
                     </p>
                 </div>
                 <div class="border-b-1 border-[#386641] mt-20">
-                    <input type="text" placeholder="Responder" class="text-xl">
+                    <input type="text" placeholder="Responder" class="text-xl w-185 focus: outline-none">
+                    <span class="mdi mdi-send text-[#A7A7A7] cursor-pointer " @click="enviar"></span>
                 </div>
             </div>
         </div>

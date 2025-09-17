@@ -96,7 +96,7 @@ const AlunosCadastrados = [
     cpf: '123.345.612-93',
     curso: {id: 1, nome: 'Téc Informática para Internet'},
     tipo: 1
-  }
+  },
 
 ]
 
