@@ -24,7 +24,7 @@ class OcorrenciaService {
 
   async addOcorrencia(NovaOcorrencia) {
     try {
-      const { data } = await api.post('/ocorrencias', NovaOcorrencia);
+      const { data } = await api.post('ocorrencias/', NovaOcorrencia);
       return data;
     } catch (error) {
       console.error('Erro ao adicionar ocorrência:', error);

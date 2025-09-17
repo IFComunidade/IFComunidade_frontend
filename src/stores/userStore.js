@@ -5,6 +5,7 @@ import userService from "@/services/userService";
 export const useUserStore = defineStore('usuario', () => {
 
   const usuario = ref({
+    id: null,
     username: '',
     email: '',
     password: '',

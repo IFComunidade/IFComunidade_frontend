@@ -11,10 +11,6 @@ const userStore = useUserStore();
 
 const validarSenha = ref('')
 
-// async function registrarAluno () {
-//
-//
-
 const currentStep = ref(1)
 
 function nextStep() {
@@ -53,7 +49,7 @@ function prevStep() {
   @prev="prevStep"
   />
 
-  <PassoQuatroComponent 
+  <PassoQuatroComponent
   v-if="currentStep === 4"
   @next="nextStep"
   @prev="prevStep"
