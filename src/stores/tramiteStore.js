@@ -4,6 +4,13 @@ import TramiteService from '@/services/tramiteService';
 
 export const useTramiteStore = defineStore('tramite', () => {
 
+  const tramite = ref({
+    data: '',
+    resposta: '',
+    ocorrencia: '',
+    autor: '',
+  });
+
   const tramites = ref([]);
   const loading = ref(false);
 
@@ -76,6 +83,6 @@ export const useTramiteStore = defineStore('tramite', () => {
 
   }
 
-  return { tramites, isLoading, loading, TramiteCount, getTramites, addTramite, attTramite, attParcialmenteTramite, deletarTramite }
+  return { tramite, tramites, isLoading, loading, TramiteCount, getTramites, addTramite, attTramite, attParcialmenteTramite, deletarTramite }
 
 })

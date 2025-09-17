@@ -8,7 +8,7 @@ const userStore = useUserStore();
 
   let dataAtual = new Date();
   let ano = dataAtual.getFullYear();
-  let mes = dataAtual.getMonth();
+  let mes = dataAtual.getMonth() + 1;
   let dia = dataAtual.getDate();
   let dataCompleta = `${dia}-${mes}-${ano}`;
 
