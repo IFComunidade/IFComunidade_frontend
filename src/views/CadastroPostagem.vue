@@ -1,30 +1,32 @@
 <script setup>
-import { ref } from 'vue'
 import router from '@/router'
 import { usePostagemStore } from '@/stores/postagemStore'
+import { useUserStore } from '@/stores/userStore';
 
 const postagemStore = usePostagemStore();
+const userStore = useUserStore();
 
   let dataAtual = new Date();
   let ano = dataAtual.getFullYear();
   let mes = dataAtual.getMonth();
   let dia = dataAtual.getDate();
-  let dataCompleta = `${ano}-${mes}-${dia}`;
-
-
-
+  let dataCompleta = `${dia}-${mes}-${ano}`;
 
 function goBack() {
-  router.push('/MURALinterliga')
+  router.push('/MURALinterliga');
 }
 
-async function publishPost(){
 
+async function publishPost(){
   postagemStore.postagem.data = dataCompleta;
+  postagemStore.postagem.usuario = userStore.usuario.id;
+  console.log(postagemStore.postagem)
 
   try{
-    console.log(postagemStore.postagem)
+
     await postagemStore.addPostagem(postagemStore.postagem)
+    console.log(postagemStore.postagem)
+    router.push('/MURALinterliga')
   } catch (error){
     console.error('Erro ao fazer postagem', error)
     throw error
@@ -36,7 +38,7 @@ async function publishPost(){
   <div class="min-h-screen bg-[#fefcf7] p-6 md:p-12 text-[#1a3b2f]">
     <div class="flex items-center space-x-2 mb-6">
       <button @click="goBack" class="text-2xl">
-        <span class="mdi mdi-arrow-left"></span>
+        <span class="mdi mdi-arrow-left text-[#1a3b2f]"></span>
       </button>
       <h1 class="text-2xl font-semibold text-[#386641]">Criar Postagem</h1>
     </div>

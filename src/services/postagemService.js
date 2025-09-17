@@ -24,7 +24,7 @@ class PostagemService {
 
   async addPostagem(NovaPostagem) {
     try {
-      const {data} = await api.post('/postagens', NovaPostagem);
+      const {data} = await api.post('/postagens/', NovaPostagem);
       return data;
     } catch (error) {
       console.error('Erro ao adicionar postagem:', error);
