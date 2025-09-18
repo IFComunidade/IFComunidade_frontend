@@ -1,5 +1,5 @@
 <script setup>
-import  AlunosCadastrados  from '@/utils/matriculas';
+import { AlunosCadastrados } from '@/utils/matriculas';
 import { useUserStore } from '@/stores/userStore';
 import { ref, watch } from 'vue';
 import BtnContinuarComponent from './BtnContinuarComponent.vue';
