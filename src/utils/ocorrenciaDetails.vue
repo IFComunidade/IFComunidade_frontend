@@ -10,6 +10,7 @@
   });
 
 </script>
+
 <template>
   <div>
     <h1>Detalhes da Ocorrência</h1>
