@@ -62,27 +62,6 @@ const router = createRouter({
       component: RegistrarOcorrenciaView,
     },
     {
-    path: '/playground',
-    name: 'playground',
-    component: () => import('@/utils/PlayGround.vue'),
-    },
-    {
-      path: '/alunos',
-      name: 'alunos',
-      component: () => import('@/utils/RgAluno.vue'),
-    },
-    {
-      path: '/testandoListagem',
-      name: 'testandoListagem',
-      component: () => import('@/utils/testandoListagem.vue'),
-    },
-    {
-      path: '/testandoListagem/:id',
-      name: 'testandoListaOcorrenciagemId',
-      component: () => import('@/utils/ocorrenciaDetails.vue'),
-      props: true,
-    },
-    {
       path: '/ListagemOcorrencia/:id',
       name: 'Ocorrencia',
       component: DadosDaOcorrencia,
