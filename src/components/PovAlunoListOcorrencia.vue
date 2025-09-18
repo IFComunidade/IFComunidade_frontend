@@ -33,7 +33,8 @@ onMounted(() => {
       <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#386641]"></div>
   </div>
 
-    <div v-else  class="flex gap-6 mt-20 mb-15">
+  <div v-else>
+    <div class="flex gap-6 mt-20 mb-15">
       <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
       <RouterLink to="/">
         <h1 class="text-[#386641] text-3xl font-bold">Suas Ocorrências</h1>
@@ -106,5 +107,7 @@ onMounted(() => {
         </tbody>
       </table>
     </div>
+  </div>
+
   </section>
 </template>
