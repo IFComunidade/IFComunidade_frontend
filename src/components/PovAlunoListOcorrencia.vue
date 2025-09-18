@@ -2,6 +2,7 @@
 import { onMounted, ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useOcorrenciaStore } from '@/stores/ocorrenciaStore'
+import router from '@/router'
 
 const ocorrenciaStore = useOcorrenciaStore()
 
@@ -9,11 +10,17 @@ const busca = ref('');
 
 const ocorrencias = computed(() => {
   return ocorrenciaStore.ocorrencias.filter(o => o.titulo.toLowerCase().includes(busca.value.toLowerCase()))
-})
+});
+
+function detalhesOcorrencia(id) {
+  ocorrenciaStore.getOcorrenciaById(id)
+  router.push({name: 'Ocorrencia', params: { id } });
+};
+
 
 onMounted(() => {
   ocorrenciaStore.getOcorrencias()
-})
+});
 </script>
 
 <template>
@@ -64,11 +71,12 @@ onMounted(() => {
             v-for="ocorrencia in ocorrencias"
             class="hover:bg-[#DEFFEA] transition-all duration-200 cursor-pointer"
             :key="ocorrencia.id"
+            @click="detalhesOcorrencia(ocorrencia.id)"
           >
             <td class="py-4 px-4">
               <p class="text-xl">{{ ocorrencia.titulo }}</p>
               <div class="text-sm text-gray-500">
-                {{ ocorrencia.usuario.username || '@usuario' }}
+                {{ ocorrencia.usuario.username || 'sem username' }}
               </div>
             </td>
             <td class="py-4 px-4">

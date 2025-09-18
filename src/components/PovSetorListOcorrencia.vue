@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useOcorrenciaStore } from '@/stores/ocorrenciaStore'
 import SelectStatusComponent from './SelectStatusComponent.vue'
+import router from '@/router'
 
 const ocorrenciaStore = useOcorrenciaStore()
 const busca = ref('')
@@ -25,6 +26,11 @@ const ocoConcluidas = computed(() => {
 })
 
 const abaSelecionada = ref('recebidos')
+
+function detalhesOcorrencia(id) {
+  ocorrenciaStore.getOcorrenciaById(id)
+  router.push({ name: 'Ocorrencia', params: { id } })
+}
 
 onMounted(() => {
   ocorrenciaStore.getOcorrencias()
@@ -63,7 +69,7 @@ onMounted(() => {
 
     <!--OCORRENCIAS RECEBIDAS-->
 
-    <div v-if="abaSelecionada === 'recebidos'">
+    <div v-if="abaSelecionada === 'recebidos' && ocoRecebidas.length > 0">
       <table class="mt-5 min-w-full rounded-md bg-inherit text-inherit">
         <thead class="text-left">
           <tr class="text-[#386641]">
@@ -77,12 +83,16 @@ onMounted(() => {
           <tr
             v-for="recebido in ocoRecebidas"
             :key="recebido.id"
+            :ocorrenciaId="recebido.id"
+            @click="detalhesOcorrencia(recebido.id)"
             class="hover:bg-[#DEFFEA] transition-all duration-200 cursor-pointer"
           >
             <td class="py-4 px-4">
               <p class="text-xl">{{ recebido.titulo }}</p>
               <div class="text-sm text-gray-500">
-                {{ recebido.usuario.username || '@usuario' }}
+                <div class="text-sm text-gray-500">
+                  {{ recebido.usuario.username || 'sem username' }}
+                </div>
               </div>
             </td>
             <td class="py-4 px-4">
@@ -99,9 +109,18 @@ onMounted(() => {
       </table>
     </div>
 
+    <div
+      v-else-if="abaSelecionada === 'recebidos' && ocoRecebidas.length <= 0"
+      class="flex flex-col justify-center items-center"
+      style="height: 80vh"
+    >
+      <span class="mdi mdi-alert-circle-outline text-red-500 text-2xl"></span>
+      <h4 class="text-gray-500 font-medium text-xl">Nenhuma ocorrência encontrada</h4>
+    </div>
+
     <!--OCORRÊNCIAS EM ANÁLISE-->
 
-    <div v-if="abaSelecionada === 'analise'">
+    <div v-if="abaSelecionada === 'analise' && ocoAnalises.length > 0">
       <table class="mt-5 min-w-full rounded-md bg-inherit text-inherit">
         <thead class="text-left">
           <tr class="text-[#386641]">
@@ -115,12 +134,15 @@ onMounted(() => {
           <tr
             v-for="analise in ocoAnalises"
             :key="analise.id"
+            @click="detalhesOcorrencia(analise.id)"
             class="hover:bg-[#DEFFEA] transition-all duration-200 cursor-pointer"
           >
             <td class="py-4 px-4">
               <p class="text-xl">{{ analise.titulo }}</p>
               <div class="text-sm text-gray-500">
-                {{ analise.usuario.username || '@usuario' }}
+                <div class="text-sm text-gray-500">
+                  {{ analise.usuario.username || 'sem username' }}
+                </div>
               </div>
             </td>
             <td class="py-4 px-4">
@@ -137,9 +159,18 @@ onMounted(() => {
       </table>
     </div>
 
+    <div
+      v-else-if="abaSelecionada === 'analise' && ocoAnalises.length <= 0"
+      class="flex flex-col justify-center items-center"
+      style="height: 80vh"
+    >
+      <span class="mdi mdi-alert-circle-outline text-red-500 text-2xl"></span>
+      <h4 class="text-gray-500 font-medium text-xl">Nenhuma ocorrência encontrada</h4>
+    </div>
+
     <!--OCORRÊNCIAS CONCLUÍDAS-->
 
-    <div v-if="abaSelecionada === 'concluido'">
+    <div v-if="abaSelecionada === 'concluido' && ocoConcluidas.length > 0">
       <table class="mt-5 min-w-full rounded-md bg-inherit text-inherit">
         <thead class="text-left">
           <tr class="text-[#386641]">
@@ -154,12 +185,15 @@ onMounted(() => {
           <tr
             v-for="concluido in ocoConcluidas"
             :key="concluido.id"
+            @click="detalhesOcorrencia(concluido.id)"
             class="hover:bg-[#DEFFEA] transition-all duration-200 cursor-pointer"
           >
             <td class="py-4 px-4">
               <p class="text-xl">{{ concluido.titulo }}</p>
               <div class="text-sm text-gray-500">
-                {{ concluido.usuario.username || '@usuario' }}
+                <div class="text-sm text-gray-500">
+                  {{ concluido.usuario.username || 'sem username' }}
+                </div>
               </div>
             </td>
             <td class="py-4 px-4">
@@ -178,6 +212,15 @@ onMounted(() => {
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <div
+      v-else-if="abaSelecionada === 'concluido' && ocoConcluidas.length <= 0"
+      class="flex flex-col justify-center items-center"
+      style="height: 80vh"
+    >
+      <span class="mdi mdi-alert-circle-outline text-red-500 text-2xl"></span>
+      <h4 class="text-gray-500 font-medium text-xl">Nenhuma ocorrência encontrada</h4>
     </div>
   </section>
 </template>
