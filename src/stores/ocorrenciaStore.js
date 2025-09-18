@@ -45,7 +45,6 @@
       loading.value = true;
       try {
         ocorrenciaSelecionada.value = await OcorrenciaService.getOcorrenciaById(id);
-        console.log(ocorrenciaSelecionada.value)
       } catch (error) {
         console.error(`Erro ao carregar ocorrência com ID ${id}:`, error);
       } finally {
