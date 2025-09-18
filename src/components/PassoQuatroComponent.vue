@@ -23,7 +23,6 @@ async function registrarAluno() {
   try {
     erroMatricula.value = ''
 
-    //FAZ O UPLOAD DA FOTO E PEGA A KEY
     if (arquivoFoto.value) {
       const attachmentKey = await uploadImagem.upload(arquivoFoto.value)
       userStore.usuario.foto_attachment_key = attachmentKey

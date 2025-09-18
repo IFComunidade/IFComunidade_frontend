@@ -5,6 +5,7 @@ import PassoUmComponent from '@/components/PassoUmComponent.vue';
 import PassoDoisComponent from '@/components/PassoDoisComponent.vue';
 import PassoTresComponent from '@/components/PassoTresComponent.vue';
 import PassoQuatroComponent from '@/components/PassoQuatroComponent.vue';
+import router from '@/router';
 
 const userStore = useUserStore();
 
@@ -14,7 +15,7 @@ const validarSenha = ref('')
 const currentStep = ref(1)
 
 function nextStep() {
-  if (currentStep.value < 5) {
+  if (currentStep.value < 4) {
     currentStep.value++
   }
 }
@@ -50,7 +51,7 @@ function prevStep() {
 
   <PassoQuatroComponent
   v-if="currentStep === 4"
-  @next="nextStep"
+  @next="router.push('/') "
   @prev="prevStep"
   />
 
