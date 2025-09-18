@@ -100,4 +100,4 @@ const AlunosCadastrados = [
 
 ]
 
-export default AlunosCadastrados
+export default AlunosCadastrados;
