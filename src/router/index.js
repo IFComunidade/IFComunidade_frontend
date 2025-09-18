@@ -4,7 +4,6 @@ import MURALinterligaView from '@/views/MURALinterligaView.vue'
 import CadastroAlunoView from '@/views/CadastroAlunoView.vue'
 import CadastroSetorView from '@/views/CadastroSetorView.vue'
 import LoginView from '@/views/LoginView.vue'
-import PerfilView from '@/views/PerfilView.vue'
 import ListagemOcorrenciaView from '@/views/ListagemOcorrenciaView.vue'
 import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import CadastroPostagem from '@/views/CadastroPostagem.vue'
@@ -47,11 +46,6 @@ const router = createRouter({
     meta: { hideLayout: true },
     },
     {
-    path: '/Perfil',
-    name: 'Perfil',
-    component: PerfilView,
-    },
-    {
     path: '/ListagemOcorrencia',
     name: 'ListagemOcorrencia',
     component: ListagemOcorrenciaView,
@@ -60,27 +54,6 @@ const router = createRouter({
       path: '/RegistrarOcorrencia',
       name: 'RegistrarOcorrencia',
       component: RegistrarOcorrenciaView,
-    },
-    {
-    path: '/playground',
-    name: 'playground',
-    component: () => import('@/utils/PlayGround.vue'),
-    },
-    {
-      path: '/alunos',
-      name: 'alunos',
-      component: () => import('@/utils/RgAluno.vue'),
-    },
-    {
-      path: '/testandoListagem',
-      name: 'testandoListagem',
-      component: () => import('@/utils/testandoListagem.vue'),
-    },
-    {
-      path: '/testandoListagem/:id',
-      name: 'testandoListaOcorrenciagemId',
-      component: () => import('@/utils/ocorrenciaDetails.vue'),
-      props: true,
     },
     {
       path: '/ListagemOcorrencia/:id',
