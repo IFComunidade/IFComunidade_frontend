@@ -1,3 +1,5 @@
+
+
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
@@ -25,6 +27,13 @@ onMounted(() => {
 
 <template>
   <section class="px-22 flex flex-col justify-start min-h-screen">
+
+
+  <div v-if="ocorrenciaStore.isLoading" class="flex justify-center items-center flex-1">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#386641]"></div>
+  </div>
+
+  <div v-else>
     <div class="flex gap-6 mt-20 mb-15">
       <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
       <RouterLink to="/">
@@ -92,11 +101,13 @@ onMounted(() => {
                 class="mdi mdi-email-fast-outline text-xl"
               ></span>
               <span v-else-if="ocorrencia.status === 3" class="mdi mdi-email-check-outline"></span>
-              <span>{{ ocorrencia.status_display }}</span>
+              <span  class="px-4 py-4">{{ ocorrencia.status_display }}</span>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+
   </section>
 </template>

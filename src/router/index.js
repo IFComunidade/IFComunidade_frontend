@@ -4,7 +4,6 @@ import MURALinterligaView from '@/views/MURALinterligaView.vue'
 import CadastroAlunoView from '@/views/CadastroAlunoView.vue'
 import CadastroSetorView from '@/views/CadastroSetorView.vue'
 import LoginView from '@/views/LoginView.vue'
-import PerfilView from '@/views/PerfilView.vue'
 import ListagemOcorrenciaView from '@/views/ListagemOcorrenciaView.vue'
 import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import CadastroPostagem from '@/views/CadastroPostagem.vue'
@@ -45,11 +44,6 @@ const router = createRouter({
     name: 'Login',
     component: LoginView,
     meta: { hideLayout: true },
-    },
-    {
-    path: '/Perfil',
-    name: 'Perfil',
-    component: PerfilView,
     },
     {
     path: '/ListagemOcorrencia',

@@ -7,13 +7,20 @@ export const useTramiteStore = defineStore('tramite', () => {
   const tramites = ref([]);
   const loading = ref(false);
 
+  const tramite = ref({
+    id: null,
+    resposta: '',
+    ocorrencia: null,
+    autor:  null
+  })
+
   const isLoading = computed(() => loading.value);
   const TramiteCount = computed(() => tramites.value.length);
 
-  const getTramites = async () => {
+  const getTramitesByOcorrencia = async (ocorrenciaId) => {
     loading.value = true;
     try {
-      tramites.value = await TramiteService.getAllTramites();
+      tramites.value = await TramiteService.getAllTramites(ocorrenciaId);
     } catch (error) {
       console.error('Erro ao carregar trâmites:', error);
     } finally {
@@ -26,6 +33,7 @@ export const useTramiteStore = defineStore('tramite', () => {
     try {
       const novoTramite = await TramiteService.addTramite(tramite);
       tramites.value.push(novoTramite);
+      tramite.resposta = ''
     } catch (error) {
       console.error('Erro ao adicionar trâmite:', error);
     } finally {
@@ -76,6 +84,6 @@ export const useTramiteStore = defineStore('tramite', () => {
 
   }
 
-  return { tramites, isLoading, loading, TramiteCount, getTramites, addTramite, attTramite, attParcialmenteTramite, deletarTramite }
+  return { tramites, tramite, isLoading, loading, TramiteCount, getTramitesByOcorrencia, addTramite, attTramite, attParcialmenteTramite, deletarTramite }
 
 })
