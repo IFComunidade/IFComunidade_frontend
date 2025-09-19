@@ -8,6 +8,7 @@ import ListagemOcorrenciaView from '@/views/ListagemOcorrenciaView.vue'
 import RegistrarOcorrenciaView from '@/views/RegistrarOcorrenciaView.vue'
 import CadastroPostagem from '@/views/CadastroPostagem.vue'
 import DadosDaOcorrencia from '@/views/DadosDaOcorrencia.vue'
+import PerfilView from '@/views/PerfilView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -60,6 +61,11 @@ const router = createRouter({
       name: 'Ocorrencia',
       component: DadosDaOcorrencia,
       props: true,
+    },
+    {
+      path: '/Perfil',
+      name: 'Perfil',
+      component: PerfilView,
     }
   ],
 })
