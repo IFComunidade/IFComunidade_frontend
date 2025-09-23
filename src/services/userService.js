@@ -48,6 +48,21 @@ class UserService {
       throw error;
     }
   }
+  
+  async editarPerfil (id) {
+    try {
+      const { data } = await api.patch(`usuarios/${id}`, {
+    email: this.usuario.email,
+    nome: this.usuario.nome,
+    username: this.usuario.username
+  })
+  this.usuario = data 
+    }
+    catch (error) {
+      console.error('erro ao atualizar seu perfil', error);
+      throw error;
+    }
+  }
 }
 
 export default new UserService();
