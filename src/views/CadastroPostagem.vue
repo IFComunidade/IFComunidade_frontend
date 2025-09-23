@@ -15,7 +15,7 @@ const arquivoImagem = ref(null);
   let ano = dataAtual.getFullYear();
   let mes = dataAtual.getMonth();
   let dia = dataAtual.getDate();
-  let dataCompleta = `${dia}-${mes}-${ano}`;
+  let dataCompleta = `${dia}/${mes}/${ano}`;
   console.log(dataCompleta)
 
   const selecionarImagem = (event) => {

@@ -66,6 +66,19 @@ const postagensFiltradas = computed(() => {
         Explore o MURALinterliga!
       </h1>
     </div>
+
+    <div class="flex justify-between container mx-auto px-5 mt-10">
+      <div v-if="userStore.usuario.tipo == 2">
+        <router-link to="/Criar/Postagem">
+        <button type="button"
+          class="px-7 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] transition-transform duration-200 hover:scale-105" >
+          Criar +
+        </button>
+        </router-link>
+
+      </div>
+
+      <div class="relative hover:underline cursor-pointer ml-auto">
         <button class="flex items-center" @click="mostrarFiltro = !mostrarFiltro">
           <span class="mr-1 text-xl font-semibold">Filtrar Posts</span>
           <span class="text-xl font-semibold">
@@ -122,7 +135,7 @@ const postagensFiltradas = computed(() => {
             class="mx-auto mt-6 mb-6 max-w-full h-auto rounded-lg" />
           <p class="mb-10 mt-10">
             Publicado em:
-            {{ formatarData(postagem.data)  }}
+            {{ postagem.data  }}
           </p>
         </li>
       </ul>
