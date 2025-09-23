@@ -1,16 +1,31 @@
 <script setup>
 import router from '@/router'
+import { ref } from 'vue'
 import { usePostagemStore } from '@/stores/postagemStore'
 import { useUserStore } from '@/stores/userStore';
+import uploadImagem from '@/services/uploadImagem'
 
 const postagemStore = usePostagemStore();
 const userStore = useUserStore();
+const imagem = ref(null);
+const arquivoImagem = ref(null);
+
 
   let dataAtual = new Date();
   let ano = dataAtual.getFullYear();
   let mes = dataAtual.getMonth();
   let dia = dataAtual.getDate();
   let dataCompleta = `${dia}-${mes}-${ano}`;
+  console.log(dataCompleta)
+
+  const selecionarImagem = (event) => {
+  const arquivo = event.target.files[0]
+  if (arquivo) {
+    arquivoImagem.value = arquivo
+    imagem.value = URL.createObjectURL(arquivo)
+    console.log('Foto selecionada:', arquivo)
+  }
+}
 
 function goBack() {
   router.push('/MURALinterliga');
@@ -23,7 +38,10 @@ async function publishPost(){
   console.log(postagemStore.postagem)
 
   try{
-
+    if (arquivoImagem.value) {
+      const attachmentKey = await uploadImagem.upload(arquivoImagem.value)
+      postagemStore.postagem.imagem_attachment_key = attachmentKey
+    }
     await postagemStore.addPostagem(postagemStore.postagem)
     console.log(postagemStore.postagem)
     router.push('/MURALinterliga')
@@ -63,10 +81,26 @@ async function publishPost(){
         ></textarea>
       </div>
 
-      <div class="flex items-center space-x-2 text-sm text-gray-600">
-        <span class="mdi mdi-paperclip"></span>
-        <span>Inserir anexo.</span>
-      </div>
+      <label class="mt-5">
+            <input type="file" accept="image/*" @change="selecionarImagem" class="hidden mb-5" />
+            <p
+              v-if="!imagem"
+              class="flex items-center gap-3 text-base font-medium cursor-pointer text-[#A7A7A7] hover:underline transition-all duration-500"
+            >
+              <span class="mdi mdi-link-plus"></span> Inserir imagem
+            </p>
+
+            <p
+              v-else
+              @click="
+                imagem = null;
+                arquivoImagem = null
+              "
+              class="flex items-center gap-3 text-base font-medium cursor-pointer text-[#FF0000] hover:underline transition-all duration-500"
+            >
+              <span class="mdi mdi-close-circle-outline"></span> Remover imagem
+            </p>
+          </label>
 
       <div class="flex space-x-4 mt-4">
         <button

@@ -54,7 +54,7 @@ const postagensFiltradas = computed(() => {
     return postagemStore.postagens;
   }
   return postagemStore.postagens.filter(postagem =>
-    filtrosSelecionados.value.some(filtro => filtro.id === postagem.usuario)
+    filtrosSelecionados.value.some(filtro => filtro.id === postagem.usuario.id)
   );
 });
 </script>
@@ -66,19 +66,6 @@ const postagensFiltradas = computed(() => {
         Explore o MURALinterliga!
       </h1>
     </div>
-
-    <div class="flex justify-between container mx-auto px-5 mt-10">
-      <div v-if="userStore.usuario.tipo == 2">
-        <router-link to="/Criar/Postagem">
-        <button type="button"
-          class="px-7 py-1 bg-[#386641] rounded font-bold text-[#FFFCF7] transition-transform duration-200 hover:scale-105" >
-          Criar +
-        </button>
-        </router-link>
-
-      </div>
-
-      <div class="relative hover:underline cursor-pointer">
         <button class="flex items-center" @click="mostrarFiltro = !mostrarFiltro">
           <span class="mr-1 text-xl font-semibold">Filtrar Posts</span>
           <span class="text-xl font-semibold">
