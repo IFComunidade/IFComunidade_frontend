@@ -1,14 +1,14 @@
-
-
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useOcorrenciaStore } from '@/stores/ocorrenciaStore'
 import router from '@/router'
+import OptionOcorrencia from './OptionOcorrencia.vue'
 
 const ocorrenciaStore = useOcorrenciaStore()
 
 const busca = ref('');
+const abrirMenu = ref(null)
 
 const ocorrencias = computed(() => {
   return ocorrenciaStore.ocorrencias.filter(o => o.titulo.toLowerCase().includes(busca.value.toLowerCase()))
@@ -19,6 +19,10 @@ function detalhesOcorrencia(id) {
   router.push({name: 'Ocorrencia', params: { id } });
 };
 
+
+function deletarOcorrencia(id) {
+  ocorrenciaStore.deletarOcorrencia(id)
+}
 
 onMounted(() => {
   ocorrenciaStore.getOcorrencias()
@@ -82,10 +86,19 @@ onMounted(() => {
             :key="ocorrencia.id"
             @click="detalhesOcorrencia(ocorrencia.id)"
           >
-            <td class="py-4 px-4">
-              <p class="text-xl">{{ ocorrencia.titulo }}</p>
-              <div class="text-sm text-gray-500">
-                {{ ocorrencia.usuario.username || 'sem username' }}
+            <td class="relative py-4 px-4 flex items-center gap-2">
+              <span class="mdi mdi-dots-vertical text-lg cursor-pointer" @click.stop="abrirMenu = abrirMenu === ocorrencia.id ? null : ocorrencia.id"> </span>
+              <OptionOcorrencia
+              v-if="abrirMenu === ocorrencia.id"
+              @abrir="detalhesOcorrencia(ocorrencia.id)"
+              @deletar="deletarOcorrencia(ocorrencia.id)"
+              class="absolute top-15 z-100"
+              />
+              <div>
+                <p class="text-xl">{{ ocorrencia.titulo }}</p>
+                <p class="text-sm text-gray-500">
+                  {{ ocorrencia.usuario.username || 'sem username' }}
+                </p>
               </div>
             </td>
             <td class="py-4 px-4">

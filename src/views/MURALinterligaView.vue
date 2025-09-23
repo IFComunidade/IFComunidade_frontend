@@ -7,15 +7,6 @@ import { RouterLink } from 'vue-router';
 const postagemStore = usePostagemStore();
 const userStore = useUserStore();
 
-const formatarData = (dataString) => {
-  const data = new Date(dataString);
-  return data.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-};
-
 onMounted(() => {
   postagemStore.getPostagens();
 });
@@ -133,10 +124,6 @@ const postagensFiltradas = computed(() => {
           <p class="mt-10 mb-10">{{ postagem.descricao }}</p>
           <img v-if="postagem.imagem" :src="postagem.imagem.url" alt="Imagem de Postagem"
             class="mx-auto mt-6 mb-6 max-w-full h-auto rounded-lg" />
-          <p class="mb-10 mt-10">
-            Publicado em:
-            {{ formatarData(postagem.data)  }}
-          </p>
         </li>
       </ul>
     </div>
