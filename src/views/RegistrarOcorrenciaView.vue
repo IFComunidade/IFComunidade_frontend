@@ -23,7 +23,6 @@ const selecionarImagem = (event) => {
   if (arquivo) {
     arquivoImagem.value = arquivo
     imagem.value = URL.createObjectURL(arquivo)
-    console.log('Foto selecionada:', arquivo)
   }
 }
 

@@ -7,15 +7,6 @@ import { RouterLink } from 'vue-router';
 const postagemStore = usePostagemStore();
 const userStore = useUserStore();
 
-const formatarData = (dataString) => {
-  const data = new Date(dataString);
-  return data.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-};
-
 onMounted(() => {
   postagemStore.getPostagens();
 });

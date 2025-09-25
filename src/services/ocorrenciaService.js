@@ -44,7 +44,7 @@ class OcorrenciaService {
 
   async attParcialmenteOcorrencia(id, OcorrenciaAtt) {
     try {
-      const { data } = await api.patch(`ocorrencias/${id}/`, OcorrenciaAtt);
+      const { data } = await api.patch(`ocorrencias/${id}/`, {texto: OcorrenciaAtt});
       return data;
     } catch (error) {
       console.error(`Erro ao atualizar parcialmente ocorrência com ID ${id}:`, error);
@@ -54,7 +54,7 @@ class OcorrenciaService {
 
   async deletarOcorrencia(id) {
     try {
-      await api.delete(`ocorrencias/${id}`);
+      await api.delete(`ocorrencias/${id}/`);
     } catch (error) {
       console.error(`Erro ao deletar ocorrência com ID ${id}:`, error);
       throw error;
