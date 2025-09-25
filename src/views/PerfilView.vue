@@ -55,7 +55,7 @@ watch(
     <div class="flex flex-col items-center">
       <label class="cursor-pointer relative" :title="foto ? 'Mudar foto' : 'Adicionar uma foto (opcional)'">
         <input type="file" accept="image/*" @change="selecionarFoto" class="hidden mb-5" />
-        <img :src="foto || 'https://www.gravatar.com/avatar/?d=mp'" alt="Foto de perfil" class="w-30 h-30 rounded-full"/>
+        <img :src="userStore.usuario.foto?.url || 'https://www.gravatar.com/avatar/?d=mp'" alt="Foto de perfil" class="w-30 h-30 rounded-full"/>
         <span class="mdi mdi-camera absolute bg-white rounded-full px-2 py-0.5 top-22 right-0 text-2xl text-[#9ACCAC]"></span>
       </label>
     </div>
