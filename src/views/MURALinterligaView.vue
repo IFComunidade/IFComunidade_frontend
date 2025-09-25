@@ -7,15 +7,6 @@ import { RouterLink } from 'vue-router';
 const postagemStore = usePostagemStore();
 const userStore = useUserStore();
 
-const formatarData = (dataString) => {
-  const data = new Date(dataString);
-  return data.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-};
-
 onMounted(() => {
   postagemStore.getPostagens();
 });
@@ -54,7 +45,7 @@ const postagensFiltradas = computed(() => {
     return postagemStore.postagens;
   }
   return postagemStore.postagens.filter(postagem =>
-    filtrosSelecionados.value.some(filtro => filtro.id === postagem.usuario)
+    filtrosSelecionados.value.some(filtro => filtro.id === postagem.usuario.id)
   );
 });
 </script>
@@ -78,7 +69,7 @@ const postagensFiltradas = computed(() => {
 
       </div>
 
-      <div class="relative hover:underline cursor-pointer">
+      <div class="relative hover:underline cursor-pointer ml-auto">
         <button class="flex items-center" @click="mostrarFiltro = !mostrarFiltro">
           <span class="mr-1 text-xl font-semibold">Filtrar Posts</span>
           <span class="text-xl font-semibold">
@@ -135,7 +126,7 @@ const postagensFiltradas = computed(() => {
             class="mx-auto mt-6 mb-6 max-w-full h-auto rounded-lg" />
           <p class="mb-10 mt-10">
             Publicado em:
-            {{ formatarData(postagem.data)  }}
+            {{ postagem.data  }}
           </p>
         </li>
       </ul>

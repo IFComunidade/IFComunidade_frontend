@@ -47,10 +47,10 @@ onMounted(() => {
 
   <section v-else class="px-22 flex flex-col justify-start min-h-screen">
     <div class="flex gap-6 mt-20 mb-15">
-      <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
       <RouterLink to="/">
-        <h1 class="text-[#386641] text-3xl font-bold">Ouvidoria</h1>
+      <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
       </RouterLink>
+        <h1 class="text-[#386641] text-3xl font-bold">Ouvidoria</h1>
     </div>
 
     <div class="flex items-center border-b-2 border-[#386641]">
