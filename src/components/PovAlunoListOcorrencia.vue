@@ -60,10 +60,10 @@ onMounted(() => {
 
     <div v-else>
       <div class="flex gap-6 mt-20 mb-15">
+         <RouterLink to="/">
         <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
-        <RouterLink to="/">
-          <h1 class="text-[#386641] text-3xl font-bold">Suas Ocorrências</h1>
         </RouterLink>
+          <h1 class="text-[#386641] text-3xl font-bold">Suas Ocorrências</h1>
       </div>
 
       <div class="flex justify-between items-center mb-4">
