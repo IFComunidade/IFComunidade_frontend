@@ -3,11 +3,13 @@ import AreaRespostaComponent from '@/components/AreaRespostaComponent.vue'
 import EditarOcorrencia from '@/components/EditarOcorrencia.vue'
 import OcorrenciaInfoComponent from '@/components/OcorrenciaInfoComponent.vue'
 import { useOcorrenciaStore } from '@/stores/ocorrenciaStore'
+import { useUserStore } from '@/stores/userStore'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const ocorrenciaStore = useOcorrenciaStore()
+const userStore = useUserStore()
 const modoEdicao = ref(false)
 
 async function salvarOcorrencia(novaDescricao) {
@@ -29,7 +31,7 @@ onMounted(async () => {
   const ocorrenciaId = route.params.id
   await ocorrenciaStore.getOcorrenciaById(ocorrenciaId)
 
-  if(route.query.editar === 'true') {
+  if (route.query.editar === 'true') {
     modoEdicao.value = true
   }
 })
@@ -56,7 +58,20 @@ onMounted(async () => {
       <OcorrenciaInfoComponent :ocorrencia="ocorrenciaStore.ocorrenciaSelecionada" />
 
       <div class="ml-25">
-        <div class="flex">
+        <div v-if="ocorrenciaStore.ocorrenciaSelecionada?.anonima" class="flex">
+          <img
+            src="https://www.gravatar.com/avatar/?d=mp"
+            class="rounded-full w-10 h-10"
+          />
+          <div class="ml-3">
+            <p class="text-2xl">Usuário anônimo</p>
+            <p class="text-xs text-[#A7A7A7] mb-4">
+              @anonimo
+            </p>
+          </div>
+        </div>
+
+        <div class="flex" v-else>
           <img
             :src="
               ocorrenciaStore.ocorrenciaSelecionada?.usuario?.foto ||
@@ -83,6 +98,7 @@ onMounted(async () => {
             {{ ocorrenciaStore.ocorrenciaSelecionada?.texto }}
           </p>
           <span
+            v-if="userStore.usuario.tipo === 1"
             @click="modoEdicao = true"
             title="Editar descrição da ocorrência"
             class="mdi mdi-pencil-outline text-xl text-[#386641] absolute top-90 right-100 cursor-pointer"
