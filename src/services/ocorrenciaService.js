@@ -44,7 +44,7 @@ class OcorrenciaService {
 
   async attParcialmenteOcorrencia(id, OcorrenciaAtt) {
     try {
-      const { data } = await api.patch(`ocorrencias/${id}/`, OcorrenciaAtt);
+      const { data } = await api.patch(`ocorrencias/${id}/`, {texto: OcorrenciaAtt});
       return data;
     } catch (error) {
       console.error(`Erro ao atualizar parcialmente ocorrência com ID ${id}:`, error);

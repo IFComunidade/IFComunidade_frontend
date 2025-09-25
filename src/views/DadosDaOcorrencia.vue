@@ -1,26 +1,45 @@
 <script setup>
 import AreaRespostaComponent from '@/components/AreaRespostaComponent.vue'
+import EditarOcorrencia from '@/components/EditarOcorrencia.vue'
 import OcorrenciaInfoComponent from '@/components/OcorrenciaInfoComponent.vue'
 import { useOcorrenciaStore } from '@/stores/ocorrenciaStore'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const ocorrenciaStore = useOcorrenciaStore()
+const modoEdicao = ref(false)
+
+async function salvarOcorrencia(novaDescricao) {
+  try {
+    await ocorrenciaStore.attParcialmenteOcorrencia(
+      ocorrenciaStore.ocorrenciaSelecionada?.id,
+      novaDescricao,
+    )
+    if (ocorrenciaStore.ocorrenciaSelecionada) {
+      ocorrenciaStore.ocorrenciaSelecionada.texto = novaDescricao
+    }
+    modoEdicao.value = false
+  } catch (err) {
+    console.error('Erro ao mudar descrição', err)
+  }
+}
 
 onMounted(async () => {
   const ocorrenciaId = route.params.id
-  if (ocorrenciaId) {
-    await ocorrenciaStore.getOcorrenciaById(ocorrenciaId)
-  } else {
-    console.error('ID não encontrado')
+  await ocorrenciaStore.getOcorrenciaById(ocorrenciaId)
+
+  if(route.query.editar === 'true') {
+    modoEdicao.value = true
   }
 })
 </script>
 
 <template>
   <section v-if="ocorrenciaStore.isLoading" class="flex justify-center items-center h-screen">
-    <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#386641] border-t-transparent"></div>
+    <div
+      class="animate-spin rounded-full h-12 w-12 border-4 border-[#386641] border-t-transparent"
+    ></div>
   </section>
 
   <section v-else class="px-22 flex flex-col justify-start min-h-screen">
@@ -52,9 +71,23 @@ onMounted(async () => {
             </p>
           </div>
         </div>
-        <p class="max-w-200 pb-5 mb-3 border-b-2 border-[#AFD0BF]">
-          {{ ocorrenciaStore.ocorrenciaSelecionada?.texto }}
-        </p>
+        <EditarOcorrencia
+          v-if="modoEdicao"
+          :descricao-atual="ocorrenciaStore.ocorrenciaSelecionada?.texto"
+          @sair="modoEdicao = false"
+          @salvar="salvarOcorrencia"
+          class="mb-5"
+        />
+        <div v-else>
+          <p class="max-w-200 pb-5 mb-3 border-b-2 border-[#AFD0BF] relative">
+            {{ ocorrenciaStore.ocorrenciaSelecionada?.texto }}
+          </p>
+          <span
+            @click="modoEdicao = true"
+            title="Editar descrição da ocorrência"
+            class="mdi mdi-pencil-outline text-xl text-[#386641] absolute top-90 right-100 cursor-pointer"
+          ></span>
+        </div>
         <img
           v-if="ocorrenciaStore.ocorrenciaSelecionada?.imagem"
           :src="ocorrenciaStore.ocorrenciaSelecionada.imagem?.url"

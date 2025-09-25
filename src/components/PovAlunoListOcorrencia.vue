@@ -19,6 +19,14 @@ const ocorrencias = computed(() => {
   )
 })
 
+function EditarOcorrencia(id) {
+  router.push({
+    name: 'Ocorrencia',
+    params: { id },
+    query: { editar: 'true' },
+  })
+}
+
 function detalhesOcorrencia(id) {
   ocorrenciaStore.getOcorrenciaById(id)
   router.push({ name: 'Ocorrencia', params: { id } })
@@ -101,6 +109,7 @@ onMounted(() => {
             >
               <td class="relative py-4 px-4 flex items-center gap-2 overflow-visable">
                 <span
+                  title="Opções"
                   class="mdi mdi-dots-vertical text-lg cursor-pointer"
                   @click.stop="abrirMenu = abrirMenu === ocorrencia.id ? null : ocorrencia.id"
                 >
@@ -108,9 +117,10 @@ onMounted(() => {
                 <OptionOcorrencia
                   v-if="abrirMenu === ocorrencia.id"
                   @abrir="detalhesOcorrencia(ocorrencia.id)"
+                  @atualizar="EditarOcorrencia(ocorrencia.id)"
                   @deletar="
                     () => {
-                      mudarVisibilidadeConf(ocorrencia.id), abrirMenu = false
+                      mudarVisibilidadeConf(ocorrencia.id), (abrirMenu = false)
                     }
                   "
                   class="absolute top-15 z-100"
@@ -159,6 +169,7 @@ onMounted(() => {
     <ConfirmDelete
       v-if="abrirConfirmacao"
       @continuar="deletarOcorrencia"
+      @atualizar="EditarOcorrencia()"
       @fechar="abrirConfirmacao = false"
       class="absolute"
     />
