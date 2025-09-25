@@ -19,7 +19,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="px-22 flex flex-col justify-start min-h-screen">
+  <section v-if="ocorrenciaStore.isLoading" class="flex justify-center items-center h-screen">
+    <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#386641] border-t-transparent"></div>
+  </section>
+
+  <section v-else class="px-22 flex flex-col justify-start min-h-screen">
     <RouterLink to="/ListagemOcorrencia">
       <div class="flex gap-6 mt-20 mb-15">
         <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
@@ -48,7 +52,9 @@ onMounted(async () => {
             </p>
           </div>
         </div>
-        <p class="max-w-200 pb-5 mb-3 border-b-2 border-[#AFD0BF]">{{ ocorrenciaStore.ocorrenciaSelecionada?.texto }}</p>
+        <p class="max-w-200 pb-5 mb-3 border-b-2 border-[#AFD0BF]">
+          {{ ocorrenciaStore.ocorrenciaSelecionada?.texto }}
+        </p>
         <img
           v-if="ocorrenciaStore.ocorrenciaSelecionada?.imagem"
           :src="ocorrenciaStore.ocorrenciaSelecionada.imagem?.url"
