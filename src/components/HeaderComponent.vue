@@ -66,7 +66,8 @@ const activeColor = (path) => (route.path === path ? 'color: #141414' : 'color: 
         </ul>
       </div>
       <div v-else class="flex items-center gap-4">
-         <span>{{userStore.usuario.username }}</span>
+         <span v-if="userStore.usuario.tipo === 1">{{userStore.usuario.username }}</span>
+           <span v-else>{{userStore.usuario.sigla }}</span>
         <img
           :src="userStore.usuario.foto?.url || 'https://www.gravatar.com/avatar/?d=mp'"
           alt="Foto de perfil"
