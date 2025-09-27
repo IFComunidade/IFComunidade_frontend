@@ -54,7 +54,7 @@ class OcorrenciaService {
 
   async deletarOcorrencia(id) {
     try {
-      await api.delete(`ocorrencias/${id}`);
+      await api.delete(`ocorrencias/${id}/`);
     } catch (error) {
       console.error(`Erro ao deletar ocorrência com ID ${id}:`, error);
       throw error;

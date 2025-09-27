@@ -21,7 +21,7 @@ async function login() {
   try {
     const result = await userStore.login(email.value, senha.value)
     console.log('Login sucesso ->', result)
-    
+
     await router.push('/')
   } catch (error) {
     console.error('Erro do login:', error)
@@ -73,7 +73,7 @@ async function login() {
         </div>
         <p v-if="senhaIncorreta" class="text-red-600 text-sm mt-1 mb-2 w-full text-left flex items-center gap-2">
           <span class="mdi mdi-alert-circle-outline"></span>
-          Senha incorreta!
+          Credenciais Inválidas!
         </p>
         <button
           type="submit"

@@ -45,7 +45,7 @@ const postagensFiltradas = computed(() => {
     return postagemStore.postagens;
   }
   return postagemStore.postagens.filter(postagem =>
-    filtrosSelecionados.value.some(filtro => filtro.id === postagem.usuario)
+    filtrosSelecionados.value.some(filtro => filtro.id === postagem.usuario.id)
   );
 });
 </script>
@@ -69,7 +69,7 @@ const postagensFiltradas = computed(() => {
 
       </div>
 
-      <div class="relative hover:underline cursor-pointer">
+      <div class="relative hover:underline cursor-pointer ml-auto">
         <button class="flex items-center" @click="mostrarFiltro = !mostrarFiltro">
           <span class="mr-1 text-xl font-semibold">Filtrar Posts</span>
           <span class="text-xl font-semibold">
@@ -111,27 +111,22 @@ const postagensFiltradas = computed(() => {
     </div>
   </section>
 
-  <!-- Verificando se está carregando -->
-  <section class="flex flex-col justify-center items-center gap-12">
-    <div v-if="postagemStore.isLoading">
-      <p>Carregando postagens</p>
-    </div>
 
-    <!--Postagens carregadas-->
-    <div v-else class="max-w-3xl mx-auto p-6">
+  <section class="flex flex-col justify-center items-center gap-12">
+    <div class="max-w-3xl mx-auto p-6">
       <ul>
         <li v-for="postagem in postagensFiltradas" :key="postagem.id" class="border-b-1 border-[#386641] mb-6 pb-6">
-          <div class="flex justify-between w-28">
+          <div class="flex gap-8">
             <img src="https://www.gravatar.com/avatar/?d=mp" alt="perfilfoto" class="rounded-full w-10 h-10">
-            <h3 class="mt-3 font-bold">Pessoa</h3>
+            <h3 class="mt-3 font-bold">{{ postagem.usuario?.nome }}</h3>
           </div>
-          <h2 class="ml-3 mt-8 font-bold text-2xl">{{ postagem.titulo }}</h2>
+          <h2 class="mt-8 font-bold text-2xl">{{ postagem.titulo }}</h2>
           <p class="mt-10 mb-10">{{ postagem.descricao }}</p>
           <img v-if="postagem.imagem" :src="postagem.imagem.url" alt="Imagem de Postagem"
             class="mx-auto mt-6 mb-6 max-w-full h-auto rounded-lg" />
-          <p class="mb-20 mt-10">
+          <p class="mb-10 mt-10">
             Publicado em:
-            {{ postagem.data ? new Date(postagem.data).toLocaleDateString() : 'Data inválida' }}
+            {{ postagem.data  }}
           </p>
         </li>
       </ul>

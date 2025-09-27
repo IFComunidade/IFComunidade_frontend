@@ -21,6 +21,8 @@ export const useUserStore = defineStore('usuario', () => {
 
   const users = ref([]);
 
+  const loading = ref(false);
+
   const tokens = ref({
     access: null,
     refresh: null
@@ -94,6 +96,20 @@ export const useUserStore = defineStore('usuario', () => {
     localStorage.removeItem('token');
   }
 
+  const editarPerfil = async (id, perfilatt) => {
+    loading.value = true;
+      try {
+        const perfilAtualizado = await userService.editarPerfil(id, perfilatt);
+        const index = users.value.findIndex(o => o.id === id);
+        if (index !== -1) {
+        usuario.value[index] = perfilAtualizado;
+        }
+        } catch (error) {
+        console.error('Erro ao atualizar seu perfil:', error);
+        } finally {
+        loading.value = false;
+        }
+  }
 
   const initStore = () => {
   const savedToken = localStorage.getItem('token');
@@ -107,6 +123,6 @@ export const useUserStore = defineStore('usuario', () => {
 
 initStore();
 
-  return { usuario, users, getAllUsers, registrarUsuario, login, isLoggedIn, logout };
+  return { usuario, users, getAllUsers, registrarUsuario, login, isLoggedIn, logout, editarPerfil };
 
 })
