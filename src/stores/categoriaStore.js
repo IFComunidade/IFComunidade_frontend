@@ -15,7 +15,6 @@ export const useCategoriaStore = defineStore('categoria', () => {
       loading.value = true;
       try {
         categorias.value = await CategoriaService.getAllCategorias();
-        console.log(categorias.value)
       } catch (error) {
         console.error('Erro ao carregar categorias:', error);
       } finally {

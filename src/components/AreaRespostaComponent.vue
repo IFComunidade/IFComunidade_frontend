@@ -21,7 +21,7 @@ async function postarResposta() {
   if (ocorrenciaStore.ocorrenciaSelecionada.id && userStore.usuario.id && tramiteStore.tramite.resposta) {
     tramiteStore.tramite.ocorrencia = ocorrenciaStore.ocorrenciaSelecionada.id
     tramiteStore.tramite.autor = userStore.usuario.id
-    await tramiteStore.addTramite(tramiteStore.tramite) 
+    await tramiteStore.addTramite(tramiteStore.tramite)
   } else {
     console.error('Dados de ocorrência, usuário ou resposta indisponíveis para postar.')
   }
@@ -33,13 +33,13 @@ async function postarResposta() {
     <div v-for="respostas in tramiteStore.tramites" :key="respostas.id" class="mt-15">
       <div class="flex">
         <img
-          :src="respostas.autor?.foto?.url || 'https://www.gravatar.com/avatar/?d=mp'"
-          class="rounded-full w-10 h-10"
+          :src="`http://localhost:8000${respostas.autor?.foto?.url}` || 'https://www.gravatar.com/avatar/?d=mp'"
+          class="w-10 h-10 rounded-full object-cover mr-2"
         />
         <div class="ml-3">
           <p class="text-2xl">{{ respostas.autor?.nome }}</p>
           <p class="text-xs text-[#A7A7A7] mb-4">
-            {{ respostas.data }}
+            {{ new Date(respostas.data).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).replace(',', ' - ') }}
           </p>
         </div>
       </div>

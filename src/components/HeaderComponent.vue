@@ -69,7 +69,7 @@ const activeColor = (path) => (route.path === path ? 'color: #141414' : 'color: 
          <RouterLink to="/Perfil" class="flex items-center gap-4"><span v-if="userStore.usuario.tipo === 1">{{userStore.usuario.username }}</span>
            <span v-else>{{userStore.usuario.sigla }}</span>
         <img
-          :src="userStore.usuario.foto?.url || 'https://www.gravatar.com/avatar/?d=mp'"
+          :src="`http://localhost:8000${userStore.usuario.foto.url}` || 'https://www.gravatar.com/avatar/?d=mp'"
           alt="Foto de perfil"
           class="w-10 h-10 rounded-full object-cover mr-10"
         />

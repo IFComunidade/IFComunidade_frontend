@@ -74,10 +74,10 @@ onMounted(async () => {
         <div class="flex" v-else>
           <img
             :src="
-              ocorrenciaStore.ocorrenciaSelecionada?.usuario?.foto ||
+              `http://localhost:8000${ocorrenciaStore.ocorrenciaSelecionada?.usuario?.foto?.url} `||
               'https://www.gravatar.com/avatar/?d=mp'
             "
-            class="rounded-full w-10 h-10"
+            class="w-10 h-10 rounded-full object-cover mr-2"
           />
           <div class="ml-3">
             <p class="text-2xl">{{ ocorrenciaStore.ocorrenciaSelecionada?.usuario?.nome }}</p>

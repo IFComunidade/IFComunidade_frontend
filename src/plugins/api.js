@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://ifcomunidade-backend.onrender.com/api',
+  baseURL: 'http://localhost:8000/api',
 });
 
 axiosInstance.interceptors.request.use(

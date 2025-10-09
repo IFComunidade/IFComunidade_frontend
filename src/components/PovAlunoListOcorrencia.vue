@@ -52,7 +52,7 @@ onMounted(() => {
 
 <template>
   <section class="px-22 flex flex-col justify-start min-h-screen relative">
-    <div v-if="ocorrenciaStore.isLoading" class="flex justify-center items-center flex-1">
+    <div v-if="ocorrenciaStore.isLoading" class="flex justify-center items-center h-screen">
       <div
         class="animate-spin rounded-full h-12 w-12 border-4 border-[#386641] border-t-transparent"
       ></div>
@@ -60,10 +60,10 @@ onMounted(() => {
 
     <div v-else>
       <div class="flex gap-6 mt-20 mb-15">
-         <RouterLink to="/">
-        <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
+        <RouterLink to="/">
+          <span class="mdi mdi-arrow-left text-3xl font-bold text-[#386641]"></span>
         </RouterLink>
-          <h1 class="text-[#386641] text-3xl font-bold">Suas Ocorrências</h1>
+        <h1 class="text-[#386641] text-3xl font-bold">Suas Ocorrências</h1>
       </div>
 
       <div class="flex justify-between items-center mb-4">
