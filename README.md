@@ -1,35 +1,30 @@
-# IFComunidade_frontend
+# IFComunidade — Front-end
 
-This template should help get you started developing with Vue 3 in Vite.
+Interface web do IFComunidade, uma plataforma que conecta a comunidade acadêmica do IFC Campus Araquari.
 
-## Recommended IDE Setup
+A aplicação reúne informações do campus e oferece um espaço para registrar ocorrências, compartilhar sugestões e acompanhar publicações.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Funcionalidades
 
-## Customize configuration
+- Cadastro e login de alunos e setores.
+- Mural de publicações — MURALinterliga.
+- Registro e consulta de ocorrências.
+- Visualização de detalhes das ocorrências.
+- Perfil do usuário.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## Tecnologias
 
-## Project Setup
+Vue 3, Vite, Tailwind CSS, Pinia e Axios.
 
-```sh
+## Executar localmente
+
+Com Node.js e npm instalados:
+
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
 
-### Compile and Minify for Production
+A comunicação com o back-end depende da configuração da API.
 
-```sh
-npm run build
-```
+## Back-end
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+[Repositório da API](https://github.com/IFComunidade/IFComunidade_backend)
